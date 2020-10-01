@@ -18,24 +18,19 @@ class ListeEnvies
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Clients::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Utilisateurs::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_client;
+    private $id_utilisateur;
 
-    public function getId(): ?int
+    public function getIdUtilisateur(): ?Utilisateurs
     {
-        return $this->id;
+        return $this->id_utilisateur;
     }
 
-    public function getIdClient(): ?Clients
+    public function setIdUtilisateur(Utilisateurs $id_utilisateur): self
     {
-        return $this->id_client;
-    }
-
-    public function setIdClient(Clients $id_client): self
-    {
-        $this->id_client = $id_client;
+        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }

@@ -28,12 +28,6 @@ class Commandes
     private $montant_commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Clients::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_client;
-
-    /**
      * @ORM\ManyToOne(targetEntity=TypesLivraison::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,6 +38,12 @@ class Commandes
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_adresse_livraison;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateurs::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_utilisateur;
 
     public function getId(): ?int
     {
@@ -74,18 +74,6 @@ class Commandes
         return $this;
     }
 
-    public function getIdClient(): ?Clients
-    {
-        return $this->id_client;
-    }
-
-    public function setIdClient(?Clients $id_client): self
-    {
-        $this->id_client = $id_client;
-
-        return $this;
-    }
-
     public function getIdTypeLivraison(): ?TypesLivraison
     {
         return $this->id_type_livraison;
@@ -106,6 +94,18 @@ class Commandes
     public function setIdAdresseLivraison(?AdresseLivraison $id_adresse_livraison): self
     {
         $this->id_adresse_livraison = $id_adresse_livraison;
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateurs
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateurs $id_utilisateur): self
+    {
+        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }

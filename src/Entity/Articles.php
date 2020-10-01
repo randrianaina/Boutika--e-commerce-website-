@@ -32,6 +32,12 @@ class Articles
      */
     private $image_article;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Articles
     public function setImageArticle(string $image_article): self
     {
         $this->image_article = $image_article;
+
+        return $this;
+    }
+
+    public function getIdCategorie(): ?Categories
+    {
+        return $this->id_categorie;
+    }
+
+    public function setIdCategorie(?Categories $id_categorie): self
+    {
+        $this->id_categorie = $id_categorie;
 
         return $this;
     }
