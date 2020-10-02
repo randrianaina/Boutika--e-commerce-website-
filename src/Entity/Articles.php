@@ -23,11 +23,6 @@ class Articles
     private $libelle_article;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $prixHT_article;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $image_article;
@@ -37,6 +32,18 @@ class Articles
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_sous_categorie;
+
+    
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description_article;
+
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $prix_ttc_article;
 
     public function getId(): ?int
     {
@@ -55,18 +62,7 @@ class Articles
         return $this;
     }
 
-    public function getPrixHTArticle(): ?float
-    {
-        return $this->prixHT_article;
-    }
-
-    public function setPrixHTArticle(float $prixHT_article): self
-    {
-        $this->prixHT_article = $prixHT_article;
-
-        return $this;
-    }
-
+    
     public function getImageArticle(): ?string
     {
         return $this->image_article;
@@ -87,6 +83,32 @@ class Articles
     public function setIdSousCategorie(?SousCategories $id_sous_categorie): self
     {
         $this->id_sous_categorie = $id_sous_categorie;
+
+        return $this;
+    }
+
+   
+
+    public function getDescriptionArticle(): ?string
+    {
+        return $this->description_article;
+    }
+
+    public function setDescriptionArticle(string $description_article): self
+    {
+        $this->description_article = $description_article;
+
+        return $this;
+    }
+
+    public function getPrixTtcArticle(): ?string
+    {
+        return $this->prix_ttc_article;
+    }
+
+    public function setPrixTtcArticle(string $prix_ttc_article): self
+    {
+        $this->prix_ttc_article = $prix_ttc_article;
 
         return $this;
     }

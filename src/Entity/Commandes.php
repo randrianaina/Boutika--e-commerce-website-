@@ -22,10 +22,7 @@ class Commandes
      */
     private $date_commande;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $montant_commande;
+   
 
     /**
      * @ORM\ManyToOne(targetEntity=TypesLivraison::class)
@@ -45,6 +42,11 @@ class Commandes
      */
     private $id_utilisateur;
 
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=2)
+     */
+    private $montant_commande;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,18 +64,7 @@ class Commandes
         return $this;
     }
 
-    public function getMontantCommande(): ?float
-    {
-        return $this->montant_commande;
-    }
-
-    public function setMontantCommande(float $montant_commande): self
-    {
-        $this->montant_commande = $montant_commande;
-
-        return $this;
-    }
-
+   
     public function getIdTypeLivraison(): ?TypesLivraison
     {
         return $this->id_type_livraison;
@@ -106,6 +97,18 @@ class Commandes
     public function setIdUtilisateur(?Utilisateurs $id_utilisateur): self
     {
         $this->id_utilisateur = $id_utilisateur;
+
+        return $this;
+    }
+
+    public function getMontantCommande(): ?string
+    {
+        return $this->montant_commande;
+    }
+
+    public function setMontantCommande(string $montant_commande): self
+    {
+        $this->montant_commande = $montant_commande;
 
         return $this;
     }
