@@ -33,10 +33,10 @@ class Articles
     private $image_article;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="id_article")
+     * @ORM\ManyToOne(targetEntity=SousCategories::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $categories;
+    private $id_sous_categorie;
 
     public function getId(): ?int
     {
@@ -79,14 +79,14 @@ class Articles
         return $this;
     }
 
-    public function getCategories(): ?Categories
+    public function getIdSousCategorie(): ?SousCategories
     {
-        return $this->categories;
+        return $this->id_sous_categorie;
     }
 
-    public function setCategories(?Categories $categories): self
+    public function setIdSousCategorie(?SousCategories $id_sous_categorie): self
     {
-        $this->categories = $categories;
+        $this->id_sous_categorie = $id_sous_categorie;
 
         return $this;
     }

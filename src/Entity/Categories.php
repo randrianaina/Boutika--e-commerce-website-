@@ -24,10 +24,6 @@ class Categories
      */
     private $libelle_categorie;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="categories")
-     */
-    private $id_article;
 
     public function __construct()
     {
@@ -51,34 +47,5 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection|Articles[]
-     */
-    public function getIdArticle(): Collection
-    {
-        return $this->id_article;
-    }
-
-    public function addIdArticle(Articles $idArticle): self
-    {
-        if (!$this->id_article->contains($idArticle)) {
-            $this->id_article[] = $idArticle;
-            $idArticle->setCategories($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdArticle(Articles $idArticle): self
-    {
-        if ($this->id_article->contains($idArticle)) {
-            $this->id_article->removeElement($idArticle);
-            // set the owning side to null (unless already changed)
-            if ($idArticle->getCategories() === $this) {
-                $idArticle->setCategories(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }
