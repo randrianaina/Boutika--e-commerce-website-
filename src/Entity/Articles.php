@@ -41,7 +41,7 @@ class Articles
     private $description_article;
 
     /**
-     * @ORM\Column(type="decimal", precision=5, scale=2)
+     * @ORM\Column(type="float")
      */
     private $prix_ttc_article;
 

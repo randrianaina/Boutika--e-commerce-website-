@@ -43,7 +43,7 @@ class Commandes
     private $id_utilisateur;
 
     /**
-     * @ORM\Column(type="decimal", precision=5, scale=2)
+     * @ORM\Column(type="float")
      */
     private $montant_commande;
 
