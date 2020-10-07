@@ -6,12 +6,12 @@ use App\Entity\Articles;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AcceuilController extends AbstractController
+class ArticlesController extends AbstractController
 {
     /**
-     * @Route("/acceuil", name="acceuil")
+     * @Route("/articles", name="articles")
      */
-    public function index()
+    public function All()
     {
         $depot= $this->getDoctrine()->getRepository(Articles::class);
         $articles= $depot->findAll();
@@ -19,8 +19,8 @@ class AcceuilController extends AbstractController
             throw $this->createNotFoundException('Pas d\'articles trouvés ...!');
         }
 
-        return $this->render('acceuil/index.html.twig', ['articles' => $articles,
-            'controller_name' => 'AcceuilController',
+        return $this->render('articles/index.html.twig', ['articles'=>$articles,
+            'controller_name' => 'ArticlesController',
         ]);
     }
 }
