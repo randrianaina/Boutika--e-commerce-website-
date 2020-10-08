@@ -27,13 +27,6 @@ class Articles
      */
     private $image_article;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=SousCategories::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_sous_categorie;
-
-    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,6 +37,12 @@ class Articles
      * @ORM\Column(type="float")
      */
     private $prix_ttc_article;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SousCategories::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sousCategories;
 
     public function getId(): ?int
     {
@@ -74,19 +73,6 @@ class Articles
 
         return $this;
     }
-
-    public function getIdSousCategorie(): ?SousCategories
-    {
-        return $this->id_sous_categorie;
-    }
-
-    public function setIdSousCategorie(?SousCategories $id_sous_categorie): self
-    {
-        $this->id_sous_categorie = $id_sous_categorie;
-
-        return $this;
-    }
-
    
 
     public function getDescriptionArticle(): ?string
@@ -109,6 +95,18 @@ class Articles
     public function setPrixTtcArticle(string $prix_ttc_article): self
     {
         $this->prix_ttc_article = $prix_ttc_article;
+
+        return $this;
+    }
+
+    public function getSousCategories(): ?SousCategories
+    {
+        return $this->sousCategories;
+    }
+
+    public function setSousCategories(?SousCategories $sousCategories): self
+    {
+        $this->sousCategories = $sousCategories;
 
         return $this;
     }

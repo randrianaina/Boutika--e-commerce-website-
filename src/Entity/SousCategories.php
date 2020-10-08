@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SousCategoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,11 +24,23 @@ class SousCategories
      */
     private $libelle_sous_categorie;
 
+    
+
     /**
-     * @ORM\ManyToOne(targetEntity=Categories::class)
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="sousCategories", orphanRemoval=true)
+     */
+    private $articles;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="sousCategories")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_categorie;
+    private $categories;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,14 +59,47 @@ class SousCategories
         return $this;
     }
 
-    public function getIdCategorie(): ?Categories
+    
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
     {
-        return $this->id_categorie;
+        return $this->articles;
     }
 
-    public function setIdCategorie(?Categories $id_categorie): self
+    public function addArticle(Articles $article): self
     {
-        $this->id_categorie = $id_categorie;
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setSousCategories($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getSousCategories() === $this) {
+                $article->setSousCategories(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }

@@ -24,10 +24,16 @@ class Categories
      */
     private $libelle_categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SousCategories::class, mappedBy="categories", orphanRemoval=true)
+     */
+    private $sousCategories;
+
 
     public function __construct()
     {
         $this->id_article = new ArrayCollection();
+        $this->sousCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,6 +49,37 @@ class Categories
     public function setLibelleCategorie(string $libelle_categorie): self
     {
         $this->libelle_categorie = $libelle_categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SousCategories[]
+     */
+    public function getSousCategories(): Collection
+    {
+        return $this->sousCategories;
+    }
+
+    public function addSousCategory(SousCategories $sousCategory): self
+    {
+        if (!$this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories[] = $sousCategory;
+            $sousCategory->setCategories($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategories $sousCategory): self
+    {
+        if ($this->sousCategories->contains($sousCategory)) {
+            $this->sousCategories->removeElement($sousCategory);
+            // set the owning side to null (unless already changed)
+            if ($sousCategory->getCategories() === $this) {
+                $sousCategory->setCategories(null);
+            }
+        }
 
         return $this;
     }

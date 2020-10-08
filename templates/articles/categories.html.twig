@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticlesController!{% endblock %}
+
+{% block body %}
+<p>{{categorie.getLibelleCategorie}}</p>
+<div class="row row-cols-1 row-cols-md-3">
+{% for sous_categorie in sous_categories %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      
+      <div class="card-body">
+        <h5 class="card-title">{{sous_categorie.getLibelleSousCategorie}}</h5>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
