@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UtilisateursRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateursRepository::class)
+ * @UniqueEntity(fields={"email_utilisateur"}, message="There is already an account with this email_utilisateur")
  */
 class Utilisateurs implements UserInterface
 {

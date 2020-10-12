@@ -1,404 +1,417 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="UTF-8">
-	<title>
-		{% block title %}Welcome!
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{#BOOTSTRAP#}
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+			<link rel="stylesheet" href="{{ asset('boutika.css') }}">
+
+
 		{% endblock %}
-	</title>
-	{% block stylesheets %}
-	{#BOOTSTRAP#}
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	</head>
 
-	<link rel="stylesheet" href="{{ asset('boutika.css') }}">
+	<body>
 
+		<header>
 
+			{#NAVBAR#}
+			<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
 
-	{% endblock %}
-</head>
-
-<body>
-
-	<header>
-
-		{#NAVBAR#}
-		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
-
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
 
-			<div class="collapse navbar-collapse " id="navbarSupportedContent">
-				<ul class="navbar-nav ml-auto ">
-					<li class="nav-item active">
-						<a class="nav-link text-white " href="#">Mon compte
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-white" href="#">Panier
-							<i class="fas fa-shopping-cart"></i>
-						</a>
-					</li>
-				</ul>
+				<div class="collapse navbar-collapse " id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto ">
+						{% if app.user %}
+							<li class="nav-item">Bienvenue
+								{{ app.user.username }}</li>
+							<li class="nav-item active">
+								<a class="nav-link text-white " href="#">Mon compte
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+						{% else %}
+							<li class="nav-item active">
+								<a class="nav-link text-white " href="{{ path('app_login') }}">Connexion
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+						{% endif %}
 
-			</div>
-		</nav>
-		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-secondary">
-			<a class="navbar-brand" href="#">BOUTIKA</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('acceuil') }}">Acceuil
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#">Panier
+								<i class="fas fa-shopping-cart"></i>
+							</a>
+						</li>
+						{% if app.user %}
+							<li class="nav-item">
+								<a href="{{ path('app_logout') }}">Déconnexion</a>
+							</li>
+						{% endif %}
+					</ul>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produits
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">SACS</a>
-							<a class="dropdown-item" href="#">DECO</a>
-							<a class="dropdown-item" href="#">MODE</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="{{ path('articles') }}">Tous</a>
-						</div>
+				</div>
+			</nav>
+			<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-secondary">
+				<a class="navbar-brand" href="#">BOUTIKA</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-					</li>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="{{ path('acceuil') }}">Acceuil
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
 
-					<li class="nav-item dropdown mega-dropdown active">
-						<a class="nav-link dropdown-toggle text-uppercase" id="navbarDropdownMenuLink2"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Features
-							<span class="sr-only">(current)</span>
-						</a>
-						<div class="dropdown-menu mega-menu v-2 z-depth-1 pink darken-4 py-5 px-3"
-							aria-labelledby="navbarDropdownMenuLink2">
-							<div class="row">
-								<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">Featured</h6>
-									<ul class="list-unstyled">
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Lorem ipsum dolor sit amet
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Consectetur adipiscing elit
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Sed do eiusmod tempor
-												incididunt
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Ut labore et dolore magna
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Ut enim ad minim veniam
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">Related</h6>
-									<ul class="list-unstyled">
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Quis nostrud exercitation
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Duis aute irure dolor in
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Laboris nisi ut aliquip ex
-												ea commodo consequat
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Reprehenderit in voluptate
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Esse cillum dolore eu fugiat
-												nulla pariatur
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-6 col-xl-3 sub-menu mb-md-0 mb-xl-0 mb-4">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">Design</h6>
-									<ul class="list-unstyled">
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Excepteur sint occaecat
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Sunt in culpa qui officia
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Sed ut perspiciatis unde
-												omnis iste natus error
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Mollit anim id est laborum
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Accusantium doloremque
-												laudantium
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="col-md-6 col-xl-3 sub-menu mb-0">
-									<h6 class="sub-title text-uppercase font-weight-bold white-text">Programming</h6>
-									<ul class="list-unstyled">
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Totam rem aperiam eaque
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Beatae vitae dicta sun
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Quae ab illo inventore
-												veritatis et quasi
-												architecto
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Nemo enim ipsam voluptatem
-											</a>
-										</li>
-										<li>
-											<a class="menu-item pl-0" href="#!">
-												<i class="fas fa-caret-right pl-1 pr-3"></i>Neque porro quisquam est
-											</a>
-										</li>
-									</ul>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produits
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">SACS</a>
+								<a class="dropdown-item" href="#">DECO</a>
+								<a class="dropdown-item" href="#">MODE</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{{ path('articles') }}">Tous</a>
+							</div>
+
+						</li>
+
+						<li class="nav-item dropdown mega-dropdown active">
+							<a class="nav-link dropdown-toggle text-uppercase" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Features
+								<span class="sr-only">(current)</span>
+							</a>
+							<div class="dropdown-menu mega-menu v-2 z-depth-1 pink darken-4 py-5 px-3" aria-labelledby="navbarDropdownMenuLink2">
+								<div class="row">
+									<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
+										<h6 class="sub-title text-uppercase font-weight-bold white-text">Featured</h6>
+										<ul class="list-unstyled">
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Lorem ipsum dolor sit amet
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Consectetur adipiscing elit
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Sed do eiusmod tempor
+																																																																																																																																										incididunt
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Ut labore et dolore magna
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Ut enim ad minim veniam
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
+										<h6 class="sub-title text-uppercase font-weight-bold white-text">Related</h6>
+										<ul class="list-unstyled">
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Quis nostrud exercitation
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Duis aute irure dolor in
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Laboris nisi ut aliquip ex
+																																																																																																																																										ea commodo consequat
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Reprehenderit in voluptate
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Esse cillum dolore eu fugiat
+																																																																																																																																										nulla pariatur
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-md-6 col-xl-3 sub-menu mb-md-0 mb-xl-0 mb-4">
+										<h6 class="sub-title text-uppercase font-weight-bold white-text">Design</h6>
+										<ul class="list-unstyled">
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Excepteur sint occaecat
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Sunt in culpa qui officia
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Sed ut perspiciatis unde
+																																																																																																																																										omnis iste natus error
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Mollit anim id est laborum
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Accusantium doloremque
+																																																																																																																																										laudantium
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-md-6 col-xl-3 sub-menu mb-0">
+										<h6 class="sub-title text-uppercase font-weight-bold white-text">Programming</h6>
+										<ul class="list-unstyled">
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Totam rem aperiam eaque
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Beatae vitae dicta sun
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Quae ab illo inventore
+																																																																																																																																										veritatis et quasi
+																																																																																																																																										architecto
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Nemo enim ipsam voluptatem
+												</a>
+											</li>
+											<li>
+												<a class="menu-item pl-0" href="#!">
+													<i class="fas fa-caret-right pl-1 pr-3"></i>Neque porro quisquam est
+												</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-					</li>
+						</li>
 
-					<li class="nav-item">
-						<a class="nav-link" href="#">A propos de nous</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contactez-nous</a>
-					</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">A propos de nous</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Contactez-nous</a>
+						</li>
 
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Ma recherche" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-						<i class="fas fa-search"></i>
-					</button>
-				</form>
-			</div>
-		</nav>
-
-
-	</header>
-	<main>
-		{% block body %}{% endblock %}
-	</main>
-	<!-- Footer -->
-	<footer class="page-footer font-small mdb-color pt-4 bg-info">
-
-		<!-- Footer Links -->
-		<div class="container text-center text-md-left">
-
-			<!-- Footer links -->
-			<div class="row text-center text-md-left mt-3 pb-3">
-
-				<!-- Grid column -->
-				<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
-					<p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-						consectetur
-						adipisicing elit.</p>
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search" placeholder="Ma recherche" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+							<i class="fas fa-search"></i>
+						</button>
+					</form>
 				</div>
-				<!-- Grid column -->
+			</nav>
 
-				<hr class="w-100 clearfix d-md-none">
 
-				<!-- Grid column -->
-				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-					<p>
-						<a class="text-dark" href="#">MDBootstrap</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">MDWordPress</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">BrandFlow</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">Bootstrap Angular</a>
-					</p>
-				</div>
-				<!-- Grid column -->
+		</header>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		<!-- Footer -->
+		<footer
+			class="page-footer font-small mdb-color pt-4 bg-info">
 
-				<hr class="w-100 clearfix d-md-none">
+			<!-- Footer Links -->
+			<div
+				class="container text-center text-md-left">
 
-				<!-- Grid column -->
-				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-					<p>
-						<a class="text-dark" href="#">Your Account</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">Become an Affiliate</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">Shipping Rates</a>
-					</p>
-					<p>
-						<a class="text-dark" href="#">Help</a>
-					</p>
-				</div>
+				<!-- Footer links -->
+				<div
+					class="row text-center text-md-left mt-3 pb-3">
 
-				<!-- Grid column -->
-				<hr class="w-100 clearfix d-md-none">
+					<!-- Grid column -->
+					<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+						<h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
+						<p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+																																																																					consectetur
+																																																																					adipisicing elit.</p>
+					</div>
+					<!-- Grid column -->
 
-				<!-- Grid column -->
-				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-					<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-					<p>
-						<i class="fas fa-home mr-3"></i>
-						New York, NY 10012, US</p>
-					<p>
-						<i class="fas fa-envelope mr-3"></i>
-						info@gmail.com</p>
-					<p>
-						<i class="fas fa-phone mr-3"></i>
-						+ 01 234 567 88</p>
-					<p>
-						<i class="fas fa-print mr-3"></i>
-						+ 01 234 567 89</p>
-				</div>
-				<!-- Grid column -->
+					<hr
+					class="w-100 clearfix d-md-none">
 
-			</div>
-			<!-- Footer links -->
+					<!-- Grid column -->
+					<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+						<h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+						<p>
+							<a class="text-dark" href="#">MDBootstrap</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">MDWordPress</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">BrandFlow</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">Bootstrap Angular</a>
+						</p>
+					</div>
+					<!-- Grid column -->
 
-			<hr>
+					<hr
+					class="w-100 clearfix d-md-none">
 
-			<!-- Grid row -->
-			<div class="row d-flex align-items-center">
-
-				<!-- Grid column -->
-				<div class="col-md-7 col-lg-8">
-
-					<!--Copyright-->
-					<p class="text-center text-md-left">© 2020 Copyright:
-						<a href="https://mdbootstrap.com/">
-							<strong>
-								MDBootstrap.com</strong>
-						</a>
-					</p>
-
-				</div>
-				<!-- Grid column -->
-
-				<!-- Grid column -->
-				<div class="col-md-5 col-lg-4 ml-lg-0">
-
-					<!-- Social buttons -->
-					<div class="text-center text-md-right">
-						<ul class="list-unstyled list-inline">
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-									<i class="fab fa-google-plus-g"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
+					<!-- Grid column -->
+					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+						<h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+						<p>
+							<a class="text-dark" href="#">Your Account</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">Become an Affiliate</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">Shipping Rates</a>
+						</p>
+						<p>
+							<a class="text-dark" href="#">Help</a>
+						</p>
 					</div>
 
+					<!-- Grid column -->
+					<hr
+					class="w-100 clearfix d-md-none">
+
+					<!-- Grid column -->
+					<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+						<h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+						<p>
+							<i class="fas fa-home mr-3"></i>
+							New York, NY 10012, US</p>
+						<p>
+							<i class="fas fa-envelope mr-3"></i>
+							info@gmail.com</p>
+						<p>
+							<i class="fas fa-phone mr-3"></i>
+							+ 01 234 567 88</p>
+						<p>
+							<i class="fas fa-print mr-3"></i>
+							+ 01 234 567 89</p>
+					</div>
+					<!-- Grid column -->
+
 				</div>
-				<!-- Grid column -->
+				<!-- Footer links -->
+
+				<hr>
+
+				<!-- Grid row -->
+				<div
+					class="row d-flex align-items-center">
+
+					<!-- Grid column -->
+					<div
+						class="col-md-7 col-lg-8">
+
+						<!--Copyright-->
+						<p class="text-center text-md-left">© 2020 Copyright:
+							<a href="https://mdbootstrap.com/">
+								<strong>
+									MDBootstrap.com</strong>
+							</a>
+						</p>
+
+					</div>
+					<!-- Grid column -->
+
+					<!-- Grid column -->
+					<div
+						class="col-md-5 col-lg-4 ml-lg-0">
+
+						<!-- Social buttons -->
+						<div class="text-center text-md-right">
+							<ul class="list-unstyled list-inline">
+								<li class="list-inline-item">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+										<i class="fab fa-facebook-f"></i>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+										<i class="fab fa-google-plus-g"></i>
+									</a>
+								</li>
+								<li class="list-inline-item">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+										<i class="fab fa-linkedin-in"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+					<!-- Grid column -->
+
+				</div>
+				<!-- Grid row -->
 
 			</div>
-			<!-- Grid row -->
+			<!-- Footer Links -->
 
-		</div>
-		<!-- Footer Links -->
+		</footer>
+		<!-- Footer -->
 
-	</footer>
-	<!-- Footer -->
+		{% block javascripts %}
+			{#FONTAWESOME#}
+			<script src="https://kit.fontawesome.com/e90f7a28e4.js" crossorigin="anonymous"></script>
+			{#BOOTSTRAP  jQuery and Popper.js#}
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	{% block javascripts %}
-	{#FONTAWESOME#}
-	<script src="https://kit.fontawesome.com/e90f7a28e4.js" crossorigin="anonymous"></script>
-	{#BOOTSTRAP  jQuery and Popper.js#}
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	{#BOOTSTRAP  compiled js#}
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-		crossorigin="anonymous"></script>
+			{#BOOTSTRAP  compiled js#}
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
-	<script src="{{ asset('caroussel.js') }}"></script>
-	{% endblock %}
-</body>
+			<script src="{{ asset('caroussel.js') }}"></script>
+		{% endblock %}
+	</body>
 
 </html>

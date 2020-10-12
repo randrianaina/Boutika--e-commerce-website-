@@ -1,19 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticlesController!{% endblock %}
+{% block title %}Hello ArticlesController!
+{% endblock %}
 
 {% block body %}
-<div class="row row-cols-1 row-cols-md-3">
-{% for article in articles %}
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{article.getLibelleArticle}}</h5>
-        <p class="card-text">{{article.getPrixTtcArticle}} €</p>
-      </div>
-    </div>
-  </div>
-{% endfor %}
-</div>
+
+	<div>
+		{% for article in articles %}
+			{# CARD #}
+			<div class="card d-inline-flex m-3" style="width: 18rem; ">
+				<div class="card-body">
+					<h5 class="card-title text-center">{{article.getLibelleArticle}}</h5>
+					<div class="text-center">
+						<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top " alt="">
+					</div>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item text-center text-success">{{article.getPrixTtcArticle}}
+						€</li>
+				</ul>
+				<div
+					class="card-body">
+					{# Bouton clic panier #}
+					<a href="#" class="card-link text-warning mx-3">
+						{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
+						{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
+					</a>
+
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}
