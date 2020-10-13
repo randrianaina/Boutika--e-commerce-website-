@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Hello
+				
+			
+				This friendly message is coming from:
+			<ul>
+				<li>Your controller at
+					<code>
+						<a href="{{ 'C:/Users/randr/Google Drive/Etudes/Developpeur web/AFPA/Projets/Boutika/src/Controller/PanierController.php'|file_link(0) }}">src/Controller/PanierController.php</a>
+					</code>
+				</li>
+				<li>Your template at
+					<code>
+						<a href="{{ 'C:/Users/randr/Google Drive/Etudes/Developpeur web/AFPA/Projets/Boutika/templates/panier/index.html.twig'|file_link(0) }}">templates/panier/index.html.twig</a>
+					</code>
+				</li>
+			</ul>
+		</div>
+		{% if lignes_paniers | length > 0 %}
+			<table
+				class="table table-hover">
+				{# En-tête tableau #}
+				<thead class="thead-light">
+					<tr>
+						<th colspan="2" class="text-center">Article Designation</th>
+						<th class="text-center">Prix</th>
+						<th class="text-center">Quantity</th>
+						<th class="text-center">Prix TTC</th>
+						<th class="text-center">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for ligne_panier in lignes_paniers %}
+						<tr>
+							{# Articles Image + nom #}
+						</tr>
+					</td>
+					<td class="text-success text-center">{{ligne_panier.getLibelleArticle}}</td>
+					{# Prix Unitaire #}
+					<td class="text-success text-center">{{ligne_panier.getPrixTtcArticle}}
+						€</td>
+				{% endfor %}
+				{# Quantité #}
+			</tbody>
+		</table>
+	{% endif %}
+{% endblock %}

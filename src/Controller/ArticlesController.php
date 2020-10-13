@@ -7,6 +7,8 @@ use App\Entity\SousCategories;
 use App\Entity\Categories;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ArticlesController extends AbstractController
 {
@@ -15,15 +17,22 @@ class ArticlesController extends AbstractController
      */
     public function All()
     {
+        $session = new Session();
+
+
         $depot= $this->getDoctrine()->getRepository(Articles::class);
         $articles= $depot->findAll();
         if (!$articles) {
             throw $this->createNotFoundException('Pas d\'articles trouvés ...!');
         }
 
+        dump($session->get('panier'));
+
         return $this->render('articles/index.html.twig', ['articles'=>$articles,
             'controller_name' => 'ArticlesController',
         ]);
+
+
     }
 
     /**
