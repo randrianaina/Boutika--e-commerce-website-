@@ -52,4 +52,28 @@ class Panier
             $this->lignes_panier[$id] =1;
         }
     }
+
+    public function del_ligne($id)
+    {
+        if (isset($this->lignes_panier[$id])) {
+            //create a new line and add it if empty
+            $this->lignes_panier[$id] --;
+            if ($this->lignes_panier[$id] == 0)
+        {
+            unset($this->lignes_panier[$id]);
+        }
+    }
 }
+
+    public function del_all_ligne($id)
+    {
+        if (isset($this->lignes_panier[$id])) {
+            unset($this->lignes_panier[$id]);
+        }
+    }
+
+   
+}
+    
+
+    

@@ -26,7 +26,7 @@ class ArticlesController extends AbstractController
             throw $this->createNotFoundException('Pas d\'articles trouvés ...!');
         }
 
-        dump($session->get('panier'));
+        //dump($session->get('panier'));
 
         return $this->render('articles/index.html.twig', ['articles'=>$articles,
             'controller_name' => 'ArticlesController',
