@@ -22,7 +22,7 @@
 				<div
 					class="card-body">
 					{# Bouton clic panier #}
-					<a href="#" class="card-link text-warning mx-3">
+					<a href="{{ path ('panier_art_add',{'id': article.getId}) }}" class="card-link text-warning mx-3">
 						{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
 						{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
 					</a>

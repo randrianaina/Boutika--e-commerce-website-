@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	{{form_start(details_utilisateurs)}}
+	{{form_widget(details_utilisateurs)}}
+
+	<button type='submit' class='btn btn-primary'>
+		Add the rest of infos
+	</button>
+	{{form_end(details_utilisateurs)}}
+
+
+{% endblock %}
