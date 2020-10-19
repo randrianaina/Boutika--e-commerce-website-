@@ -7,6 +7,8 @@ use App\Entity\SousCategories;
 use App\Entity\Categories;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AcceuilController extends AbstractController
 {
@@ -15,6 +17,8 @@ class AcceuilController extends AbstractController
      */
     public function Acceuil()
     {
+        $session = new Session();
+
         $depot= $this->getDoctrine()->getRepository(Articles::class);
         $articles= $depot->findAll();
         if (!$articles) {
@@ -34,6 +38,14 @@ class AcceuilController extends AbstractController
             if (!$categories) {
                 throw $this->createNotFoundException('Pas de catégories trouvés ...!');
             }
+
+            dump($session->getName());
+            dump($session->get('panier'));
+            dump($session->get('user'));
+            dump($session->get('Utilisateurs'));
+            dd($this->getUser());
+
+
 
         return $this->render('acceuil/index.html.twig', ['articles' => $articles,
             'controller_name' => 'AcceuilController',

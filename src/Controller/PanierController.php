@@ -91,6 +91,7 @@ class PanierController extends AbstractController
        dump($tableau2);
        dump($lignes_panier);
        dump($panier);
+       dump($session->get('panier'));
        
        //dump(($ligne_panier->getPrixTtcArticle()) * ($session->get('panier')->getLignesPanier()));
 
