@@ -14,7 +14,38 @@ use App\Entity\AdresseLivraison;
 
 
 class UtilisateursController extends AbstractController
-{
+{   
+
+    /**
+     * @Route("/utilisateurs/{id}", name="utilisateurs_profil")
+     */
+    public function see_details($id)
+    {
+
+        $session = new Session();
+        $session->set('utilisateur', $this->getUser());
+        $session->get('utilisateur');
+
+        $id = ($session->get('utilisateur')->getId());
+       /*  dump($session->get('utilisateur'));
+        dump($session->get('utilisateur')->getEmailUtilisateur());
+ */
+        $utilisateur = $this->getDoctrine()
+        ->getRepository(Utilisateurs::class, $utilisateur)
+        ->find($id);
+
+
+
+
+        return $this->render('utilisateurs/index.html.twig', [
+            'Utilisateur' => $utilisateur
+        ]);
+    }
+    
+
+
+
+
     /**
      * @Route("/utilisateurs/{email_utilisateur}/edit", name="utilisateurs_edit")
      */
@@ -69,4 +100,5 @@ class UtilisateursController extends AbstractController
         ]);
     }
 }
+
 
