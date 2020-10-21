@@ -89,7 +89,7 @@ class CommandesController extends AbstractController
      /**
      * @Route("utilisateur/{id}/commande/shipping_adress", name="adresse_livraison")
      */
-    public function new_adresse_livraison(AdresseLivraison $adresse, Request $request, EntityManagerInterface $em)
+    public function new_adresse_livraison(Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(InfoAdresseLivraisonType::class, $adresse);
         if ($form->isSubmitted() && $form->isValid()) {
