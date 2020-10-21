@@ -8,18 +8,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateursRepository;
+
 use App\Entity\Utilisateurs;
 use App\Form\DetailsUtilisateursType;
 use App\Entity\AdresseLivraison;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class UtilisateursController extends AbstractController
 {   
 
     /**
-     * @Route("/utilisateurs/{id}", name="utilisateurs_profil")
+     * @Route("/utilisateur/profil", name="utilisateur_profil")
      */
-    public function see_details($id)
+    public function see_details()
     {
 
         $session = new Session();
@@ -27,18 +29,21 @@ class UtilisateursController extends AbstractController
         $session->get('utilisateur');
 
         $id = ($session->get('utilisateur')->getId());
+
+        dump($this->getUser());
+        dump($id);
        /*  dump($session->get('utilisateur'));
         dump($session->get('utilisateur')->getEmailUtilisateur());
  */
         $utilisateur = $this->getDoctrine()
-        ->getRepository(Utilisateurs::class, $utilisateur)
+        ->getRepository(Utilisateurs::class)
         ->find($id);
 
 
 
 
         return $this->render('utilisateurs/index.html.twig', [
-            'Utilisateur' => $utilisateur
+            'utilisateur' => $utilisateur
         ]);
     }
     
@@ -47,38 +52,13 @@ class UtilisateursController extends AbstractController
 
 
     /**
-     * @Route("/utilisateurs/{email_utilisateur}/edit", name="utilisateurs_edit")
+     * @Route("/utilisateur/{id}/edit", name="utilisateur_edit")
      */
     public function add_details(Utilisateurs $utilisateur, Request $request, EntityManagerInterface $em)
     {
         // https://symfonycasts.com/screencast/symfony-forms/update-form
         //installation de SensioFrameworkExtraBundle
         //https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
-        /* dump($this->getUser());
-
-       
-        $session = new Session();
-        $session->set('utilisateur', $this->getUser());
-        $session->get('utilisateur');
-
-        $email_utilisateur = ($session->get('utilisateur')->getEmailUtilisateur());
-        dump($session->get('utilisateur'));
-        dump($session->get('utilisateur')->getEmailUtilisateur());
-
-
-        $utilisateur = $this->getDoctrine()
-        ->getRepository(Utilisateurs::class, $utilisateur)
-        ->findOneBy(['email_utilisateur'=>$email_utilisateur]);
-
-        $utilisateur = new Utilisateurs();
-
-        $utilisateur->setCiviliteUtilisateur();
-        $utilisateur->setNomUtilisateur();
-        $utilisateur->setPrenomUtilisateur();
-        $utilisateur->setAdresseUtilisateur();
-        $utilisateur->setCpUtilisateur();
-        $utilisateur->setVilleUtilisateur(); */
-
         $form = $this->createForm(DetailsUtilisateursType::class, $utilisateur);
 
         $form->handleRequest($request);
@@ -89,7 +69,7 @@ class UtilisateursController extends AbstractController
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
 
             return $this->redirectToRoute('utilisateurs_edit', [
-                'email_utilisateur' => $utilisateur->getEmailUtilisateur(),
+                'id' => $utilisateur->getId(),
             ]);
         }
 

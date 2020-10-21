@@ -23,7 +23,7 @@
 	<header>
 
 		{#NAVBAR#}
-		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
+		<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info" style="z-index:10000">
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,23 +36,16 @@
 					{% if app.user %}
 					<li class="nav-item">Bienvenue
 						{{ app.user.username }}</li>
-					<li class="nav-item active">
-						<a class="nav-link text-white "
-							href="{{ path ('utilisateurs_edit', {'email_utilisateur': app.user.username})}}">Mon compte
-							<span class="sr-only">(current)</span>
-						</a>
-					</li>
 					<li class="nav-item dropdown" style="z-index:10000">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produits
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte
 						</a>
 						<div class="dropdown-menu" style="z-index:10000;overflow: visible !important"
 							aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="/categories/1">SACS</a>
-							<a class="dropdown-item" href="/categories/2">DECO</a>
-							<a class="dropdown-item" href="/categories/3">MODE</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="{{ path('articles') }}">Tous</a>
+							<a class="dropdown-item" href="{{ path('utilisateur_profil')}}">Mon
+								profil</a>
+							<a class="dropdown-item" href="/categories/2">Mes commandes</a>
+							<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
 						</div>
 
 					</li>
@@ -67,15 +60,10 @@
 
 
 					<li class="nav-item">
-						<a class="nav-link text-white" href="{{ path('panier')}}">Panier
+						<a class="nav-link" href="{{ path('panier')}}">Panier
 							<i class="fas fa-shopping-cart"></i>
 						</a>
 					</li>
-					{% if app.user %}
-					<li class="nav-item">
-						<a href="{{ path('app_logout') }}">Déconnexion</a>
-					</li>
-					{% endif %}
 				</ul>
 
 			</div>

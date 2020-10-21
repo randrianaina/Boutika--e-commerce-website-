@@ -3,4 +3,35 @@
 {% block title %}Mon profil
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<div class="card">
+		<h5 class="card-header">Mon profil</h5>
+		<div class="card-body">
+			<p class="card-text">
+				Civilité :
+				{{ utilisateur.getCiviliteUtilisateur}}
+			</p>
+			<p class="card-text">
+				Nom :
+				{{ utilisateur.getNomUtilisateur}}
+				Prénom :
+				{{ utilisateur.getPrenomUtilisateur}}
+			</p>
+			<p class="card-text">
+				Adresse :
+				{{ utilisateur.getAdresseUtilisateur }}
+			</p>
+			<p class="card-text">
+				Code postal :
+				{{ utilisateur.getCpUtilisateur }}
+			</p>
+
+			<p class="card-text">
+				Ville :
+				{{ utilisateur.getVilleUtilisateur }}
+			</p>
+
+			<a href="{{ path ('utilisateur_edit', {'id': app.user.getId})}}" class="btn btn-primary">Modifier</a>
+		</div>
+	</div>
+{% endblock %}

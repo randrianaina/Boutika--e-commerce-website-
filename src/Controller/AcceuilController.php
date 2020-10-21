@@ -43,7 +43,7 @@ class AcceuilController extends AbstractController
             dump($session->get('panier'));
             dump($session->get('user'));
             dump($session->get('Utilisateurs'));
-            dd($this->getUser());
+            //dd($this->getUser());
 
 
 
