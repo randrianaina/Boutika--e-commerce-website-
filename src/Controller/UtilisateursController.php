@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateurs;
+use App\Form\DetailsUtilisateursType;
+use App\Entity\AdresseLivraison;
+use App\Repository\UtilisateursRepository;
+
+
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\UtilisateursRepository;
-
-use App\Entity\Utilisateurs;
-use App\Form\DetailsUtilisateursType;
-use App\Entity\AdresseLivraison;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 

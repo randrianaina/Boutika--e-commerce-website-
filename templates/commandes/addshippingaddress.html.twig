@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UtilisateursController!
+{% endblock %}
+
+{% block body %}
+	<h1>Ajouter des informations</h1>
+
+	{{ form_start(shipping_address_Form) }}
+	{{ form_row(shipping_address_Form.nom_contact, {
+            label: 'Contact (nom)'
+        }) }}
+	{{ form_row(shipping_address_Form.prenom_contact) }}
+	{{ form_row(shipping_address_Form.adresse_contact) }}
+	{{ form_row(shipping_address_Form.cp_contact) }}
+	{{ form_row(shipping_address_Form.ville_contact) }}
+
+
+	<button type="submit" class="btn btn-primary">Update!</button>
+	{{ form_end(shipping_address_Form) }}
+
+{% endblock %}

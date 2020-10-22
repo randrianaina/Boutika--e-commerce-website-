@@ -17,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 
@@ -87,11 +89,14 @@ class CommandesController extends AbstractController
     }
 
      /**
-     * @Route("utilisateur/{id}/commande/shipping_adress", name="adresse_livraison")
+     * @Route("utilisateur/commande/shipping_adress", name="adresse_livraison")
      */
-    public function new_adresse_livraison(AdresseLivraison $adresse, Request $request, EntityManagerInterface $em)
+    public function new_adresse_livraison(Request $request, EntityManagerInterface $em)
     {
+        $adresse = new AdresseLivraison();
         $form = $this->createForm(InfoAdresseLivraisonType::class, $adresse);
+        
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($adresse);
             $em->flush();
@@ -99,10 +104,13 @@ class CommandesController extends AbstractController
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
 
             return $this->redirectToRoute('adresse_livraison', [
-                'id' => $utilisateur->getId(),
+                /*'id' => $utilisateur->getId(),*/
             ]);
     }
 
+    return $this->render('commandes/addshippingaddress.html.twig', [
+        'shipping_address_Form' => $form->createView()
+    ]);
 
 }
 }
