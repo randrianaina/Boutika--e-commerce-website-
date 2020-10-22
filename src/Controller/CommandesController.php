@@ -89,7 +89,7 @@ class CommandesController extends AbstractController
     }
 
      /**
-     * @Route("utilisateur/commande/shipping_adress", name="adresse_livraison")
+     * @Route("utilisateur/{id}/commande/shipping_adress", name="adresse_livraison")
      */
     public function new_adresse_livraison(Request $request, EntityManagerInterface $em)
     {
@@ -98,13 +98,16 @@ class CommandesController extends AbstractController
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /* dd($adresse); */
             $em->persist($adresse);
+
+            
             $em->flush();
 
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
 
             return $this->redirectToRoute('adresse_livraison', [
-                /*'id' => $utilisateur->getId(),*/
+                'id' => $this->getUser()->getId(),
             ]);
     }
 

@@ -32,7 +32,7 @@ class UtilisateursController extends AbstractController
 
         $id = ($session->get('utilisateur')->getId());
 
-        dump($this->getUser());
+        dump($this->getUser()->getId());
         dump($id);
        /*  dump($session->get('utilisateur'));
         dump($session->get('utilisateur')->getEmailUtilisateur());
