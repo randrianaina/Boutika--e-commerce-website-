@@ -6,7 +6,7 @@ use App\Entity\Panier;
 use App\Entity\Commandes;
 use App\Entity\Utilisateurs;
 use App\Entity\AdresseLivraison;
-use App\Form\InfoAdresseLivraisonType;
+use App\Form\AddAdresseLivraisonType;
 use App\Repository\AdresseLivraisonRepository;
 
 
@@ -94,7 +94,7 @@ class CommandesController extends AbstractController
     public function new_adresse_livraison(Request $request, EntityManagerInterface $em)
     {
         $adresse = new AdresseLivraison();
-        $form = $this->createForm(InfoAdresseLivraisonType::class, $adresse);
+        $form = $this->createForm(AddAdresseLivraisonType::class, $adresse);
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

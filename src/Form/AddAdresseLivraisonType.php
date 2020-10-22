@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Security\Core\Security;
 
 
-class InfoAdresseLivraisonType extends AbstractType
+class AddAdresseLivraisonType extends AbstractType
 {
     private $security;
 

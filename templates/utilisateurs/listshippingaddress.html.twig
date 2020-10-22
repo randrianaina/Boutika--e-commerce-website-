@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses de livraison
+{% endblock %}
+
+{% block body %}
+	{% for adresse_livraison in adresses_livraison %}
+		<div class="card">
+			<h5 class="card-header">Mes adresses de livraison</h5>
+			<div class="card-body">
+				<p class="card-text">
+					Nom du contact :
+					{{ adresse_livraison.getNomContact}}
+				</p>
+				<p class="card-text">
+					Prénom du contact :
+					{{ adresse_livraison.getPrenomContact}}
+				</p>
+				<p class="card-text">
+					Adresse du contact:
+					{{ adresse_livraison.getAdresseContact }}
+				</p>
+				<p class="card-text">
+					Code postal du contact :
+					{{ adresse_livraison.getCpContact }}
+				</p>
+
+				<p class="card-text">
+					Ville du contact :
+					{{ adresse_livraison.getVilleContact }}
+				</p>
+			</div>
+		</div>
+	{% endfor %}
+	<a href="{{ path('adresse_livraison',{'id': app.user.getId}) }}" class="btn btn-primary">Ajouter</a>
+{% endblock %}

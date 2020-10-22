@@ -39,8 +39,9 @@
 								</a>
 								<div class="dropdown-menu" style="z-index:10000;overflow: visible !important" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="{{ path('utilisateur_profil')}}">Mon
-																																						profil</a>
+																																																																														profil</a>
 									<a class="dropdown-item" href="/categories/2">Mes commandes</a>
+									<a class="dropdown-item" href="{{ path('list_adresse_livraison') }}">Mes adresses de livraison</a>
 									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
 								</div>
 
@@ -96,7 +97,7 @@
 							<a class="nav-link" href="#">A propos de nous</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ path('adresse_livraison',{'id': app.user.getId}) }}">Contactez-nous</a>
+							<a class="nav-link" href="#">Contactez-nous</a>
 						</li>
 
 					</ul>
@@ -130,8 +131,8 @@
 					<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
 						<h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
 						<p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-																											consectetur
-																											adipisicing elit.</p>
+																																																							consectetur
+																																																							adipisicing elit.</p>
 					</div>
 					<!-- Grid column -->
 

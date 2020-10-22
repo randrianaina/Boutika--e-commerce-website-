@@ -81,6 +81,34 @@ class UtilisateursController extends AbstractController
             'userForm' => $form->createView()
         ]);
     }
-}
+
+    /**
+     * @Route("/utilisateur/adresses_livraison", name="list_adresse_livraison")
+     */
+    public function see_shipping_address()
+    {
+        $session = new Session();
+        $session->set('utilisateur', $this->getUser());
+        $session->get('utilisateur');
+
+        $id = ($session->get('utilisateur')->getId());
+
+        dump($this->getUser()->getId());
+        dump($id);
+    /*  dump($session->get('utilisateur'));
+        dump($session->get('utilisateur')->getEmailUtilisateur());
+*/
+        $adresses_livraison = $this->getDoctrine()
+        ->getRepository(AdresseLivraison::class)
+        ->findBy(array('id_utilisateur' => $id));
+
+
+
+
+        return $this->render('utilisateurs/listshippingaddress.html.twig', [
+            'adresses_livraison' => $adresses_livraison
+        ]);
+    }
+    }
 
 
