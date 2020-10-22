@@ -36,16 +36,17 @@ class Commandes
      */
     private $id_adresse_livraison;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateurs::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $id_utilisateur;
 
     /**
      * @ORM\Column(type="float")
      */
     private $montant_commande;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateurs::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_utilisateur;
 
     public function getId(): ?int
     {
@@ -89,17 +90,7 @@ class Commandes
         return $this;
     }
 
-    public function getIdUtilisateur(): ?Utilisateurs
-    {
-        return $this->id_utilisateur;
-    }
 
-    public function setIdUtilisateur(?Utilisateurs $id_utilisateur): self
-    {
-        $this->id_utilisateur = $id_utilisateur;
-
-        return $this;
-    }
 
     public function getMontantCommande(): ?string
     {
@@ -109,6 +100,18 @@ class Commandes
     public function setMontantCommande(string $montant_commande): self
     {
         $this->montant_commande = $montant_commande;
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateurs
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateurs $id_utilisateur): self
+    {
+        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }

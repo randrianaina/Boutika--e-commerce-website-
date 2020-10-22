@@ -42,6 +42,11 @@ class AdresseLivraison
      */
     private $ville_contact;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateurs::class, inversedBy="adresselivraison")
+     */
+    private $id_utilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class AdresseLivraison
     public function setVilleContact(string $ville_contact): self
     {
         $this->ville_contact = $ville_contact;
+
+        return $this;
+    }
+
+    public function getIdUtilisateur(): ?Utilisateurs
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateurs $id_utilisateur): self
+    {
+        $this->id_utilisateur = $id_utilisateur;
 
         return $this;
     }

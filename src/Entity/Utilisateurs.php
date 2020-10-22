@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -65,6 +67,22 @@ class Utilisateurs implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $ville_utilisateur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AdresseLivraison::class, mappedBy="id_utilisateur")
+     */
+    private $adresselivraison;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="id_utilisateur", orphanRemoval=true)
+     */
+    private $commandes;
+
+    public function __construct()
+    {
+        $this->adresselivraison = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -212,6 +230,68 @@ class Utilisateurs implements UserInterface
     public function setVilleUtilisateur(string $ville_utilisateur): self
     {
         $this->ville_utilisateur = $ville_utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AdresseLivraison[]
+     */
+    public function getAdresselivraison(): Collection
+    {
+        return $this->adresselivraison;
+    }
+
+    public function addAdresselivraison(AdresseLivraison $adresselivraison): self
+    {
+        if (!$this->adresselivraison->contains($adresselivraison)) {
+            $this->adresselivraison[] = $adresselivraison;
+            $adresselivraison->setIdUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdresselivraison(AdresseLivraison $adresselivraison): self
+    {
+        if ($this->adresselivraison->contains($adresselivraison)) {
+            $this->adresselivraison->removeElement($adresselivraison);
+            // set the owning side to null (unless already changed)
+            if ($adresselivraison->getIdUtilisateur() === $this) {
+                $adresselivraison->setIdUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commandes[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commandes $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setIdUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commandes $commande): self
+    {
+        if ($this->commandes->contains($commande)) {
+            $this->commandes->removeElement($commande);
+            // set the owning side to null (unless already changed)
+            if ($commande->getIdUtilisateur() === $this) {
+                $commande->setIdUtilisateur(null);
+            }
+        }
 
         return $this;
     }
