@@ -7,6 +7,8 @@ use App\Entity\Commandes;
 use App\Entity\Utilisateurs;
 use App\Entity\AdresseLivraison;
 use App\Form\AddAdresseLivraisonType;
+use App\Form\SelectAdresseLivraisonType;
+
 use App\Repository\AdresseLivraisonRepository;
 
 
@@ -115,5 +117,51 @@ class CommandesController extends AbstractController
         'shipping_address_Form' => $form->createView()
     ]);
 
+}
+
+
+/**
+ * @Route("/utilisateur/commande/etape1", name="RouteName")
+ */
+public function select_adresse_livraison(Request $request, EntityManagerInterface $em)
+{
+    $session = new Session();
+
+    $session->set('utilisateur', $this->getUser());
+    $session->get('utilisateur');
+
+    $id = ($session->get('utilisateur')->getId());
+    
+   /*  $adresses_livraison = $this->getDoctrine()
+    ->getRepository(AdresseLivraison::class)
+    ->findBy(array('id_utilisateur' => $id)); */
+
+   /*  $adresse = new AdresseLivraison();
+ */
+    $form = $this->createForm(SelectAdresseLivraisonType::class/* , $adresse */);
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+        
+        //https://symfony.com/doc/current/form/without_class.html
+        //getData() method store data without a class
+        $data= $form->getData();
+        dd($this->getData()->getId());
+        /* dd($adresse); 
+        $em->persist($adresse);
+
+        
+        $em->flush(); */
+
+        $this->addFlash('success', 'Adresse sélectionnée !');
+
+        
+        return $this->redirectToRoute('RouteName', [
+            'id' => $this->getUser()->getId(),
+        ]);
+}
+    
+    return $this->render('step1order.html.twig', [
+        'adresses_livraison' => $adresses_livraison, 'select_adresse_livraison' => $form->createView()
+    ]);
 }
 }
