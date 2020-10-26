@@ -160,8 +160,7 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
         ]);
 }
     
-    return $this->render('step1order.html.twig', [
-        'adresses_livraison' => $adresses_livraison, 'select_adresse_livraison' => $form->createView()
+    return $this->render('commandes/step1order.html.twig', ['select_adresse_livraison_Form' => $form->createView()
     ]);
 }
 }

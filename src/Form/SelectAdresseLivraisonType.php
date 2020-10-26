@@ -27,10 +27,15 @@ class SelectAdresseLivraisonType extends AbstractType
         $builder
             ->add('adresse_livraison', EntityType::class, [
                 'class' => AdresseLivraison::class,
+                'multiple' => false,
+                'expanded' => true,
                 'choice_label' => function (AdresseLivraison $adresse_livraison){
-                    return sprintf ('%s %s %s %d %s', $adresse_livraison->getNomContact(), 
+                    return sprintf ("'%s %s %s %d %s'\r\n", $adresse_livraison->getNomContact(), 
                     $adresse_livraison->getPrenomContact(), $adresse_livraison->getAdresseContact(),
-                    $adresse_livraison->getCpContact(), $adresse_livraison->getVilleContact());
+                    $adresse_livraison->getCpContact(), $adresse_livraison->getVilleContact(), '\r\n');
+                    sprintf ("'%s %s %s %d %s'\r\n", $adresse_livraison->getNomContact(), 
+                    $adresse_livraison->getPrenomContact(), $adresse_livraison->getAdresseContact(),
+                    $adresse_livraison->getCpContact(), $adresse_livraison->getVilleContact(), '\r\n');
                 },
                 'placeholder' => 'Veuillez sélectionner une adresse de livraison',
                 'query_builder' => function (AdresseLivraisonRepository $er){
