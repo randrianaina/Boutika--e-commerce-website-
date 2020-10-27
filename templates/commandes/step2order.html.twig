@@ -4,13 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	{{ form_start(select_adresse_livraison_Form) }}
-	{{ form_row(select_adresse_livraison_Form.adresselivraison) }}
+	{{ form_start(select_type_livraison_Form) }}
+	{{ form_row(select_type_livraison_Form.type_livraison) }}
 	{# form_widget (select_adresse_livraison_Form.adresse_livraison, {'attr': {
-						'class': 'custom-control-input'
-					}}) #}
+									'class': 'custom-control-input'
+								}}) #}
 	<button type="submit" class="btn btn-primary">Suivant</button>
-	{{ form_end(select_adresse_livraison_Form) }}
+	{{ form_end(select_type_livraison_Form) }}
 
 
 {% endblock %}

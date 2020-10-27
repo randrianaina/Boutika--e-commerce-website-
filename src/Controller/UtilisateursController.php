@@ -70,7 +70,7 @@ class UtilisateursController extends AbstractController
 
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
 
-            return $this->redirectToRoute('utilisateurs_edit', [
+            return $this->redirectToRoute('utilisateur_edit', [
                 'id' => $utilisateur->getId(),
             ]);
         }

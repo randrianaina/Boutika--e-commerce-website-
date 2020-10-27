@@ -48,12 +48,14 @@ class PanierController extends AbstractController
 
 
         dump($session->get('panier')->getLignesPanier());
+        dump($session->get('panier')->getLignesPanier('id'));
         $tableau = ($session->get('panier')->getLignesPanier());
 
        dump( array_sum($session->get('panier')->getLignesPanier()));
        
        dump($lignes_panier);
-
+/*        dd($lignes_panier);
+ */
        // quantité article
        dump(array_values($session->get('panier')->getLignesPanier()));
        
@@ -92,6 +94,7 @@ class PanierController extends AbstractController
        dump($lignes_panier);
        dump($panier);
        dump($session->get('panier'));
+       dump($item['article']->getId());
        
        //dump(($ligne_panier->getPrixTtcArticle()) * ($session->get('panier')->getLignesPanier()));
 
