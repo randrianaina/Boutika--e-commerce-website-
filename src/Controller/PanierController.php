@@ -30,22 +30,24 @@ class PanierController extends AbstractController
             $lignes_panier = $this->getDoctrine()
             ->getRepository(Articles::class)
             ->findById($id_articles);
-
-           
         }
+
         else{
             $lignes_panier= array();
+            $session->set('panier',new Panier);
         }
         $panier=($session->get('panier'));
 
         $total_quantite=0;
-        if(!empty($panier->getLignesPanier())){
+        if(!empty($panier)){
+
         $total_quantite = array_sum($panier->getLignesPanier());
         dump($total_quantite);
+
     }
       /*   */
 
-
+    //dd($session->get('panier'));
 
         dump($session->get('panier')->getLignesPanier());
         dump($session->get('panier')->getLignesPanier('id'));
@@ -94,7 +96,7 @@ class PanierController extends AbstractController
        dump($lignes_panier);
        dump($panier);
        dump($session->get('panier'));
-       dump($item['article']->getId());
+      // dump($item['article']->getId());
        
        //dump(($ligne_panier->getPrixTtcArticle()) * ($session->get('panier')->getLignesPanier()));
 

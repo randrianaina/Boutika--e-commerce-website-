@@ -19,6 +19,17 @@ class ArticlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Articles::class);
     }
 
+
+    //Fonction de recherche avec QueryBuilder de doctrine qui sera utilisé sur tout le programme par injection de dépendance ( voir https://symfony.com/doc/current/components/dependency_injection.html)
+        //https://bibliocode.fr/biblio/10
+    public function search($libelle_article) {
+        return $this->createQueryBuilder('articles')
+            ->andWhere('articles.libelle_article LIKE :libelle_article')
+            ->setParameter('libelle_article', '%'.$libelle_article.'%')
+            ->getQuery()
+            ->execute();
+    }
+
     // /**
     //  * @return Articles[] Returns an array of Articles objects
     //  */

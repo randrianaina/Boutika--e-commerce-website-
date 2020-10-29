@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Entity\SousCategories;
 use App\Entity\Categories;
+use App\Repository\ArticlesRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,6 +68,8 @@ class ArticlesController extends AbstractController
             'controller_name' => 'ArticlesController','categorie' =>$categorie
         ]);
     }
+
+
 
   
 }

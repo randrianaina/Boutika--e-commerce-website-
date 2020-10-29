@@ -24,49 +24,7 @@
 			{#NAVBAR#}
 			<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info" style="z-index:10000">
 
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-
-				<div class="collapse navbar-collapse " id="navbarSupportedContent">
-					<ul class="navbar-nav ml-auto ">
-						{% if app.user %}
-							<li class="nav-item">Bienvenue
-								{{ app.user.username }}</li>
-							<li class="nav-item dropdown" style="z-index:10000">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte
-								</a>
-								<div class="dropdown-menu" style="z-index:10000;overflow: visible !important" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="{{ path('utilisateur_profil')}}">Mon
-																																																																														profil</a>
-									<a class="dropdown-item" href="/categories/2">Mes commandes</a>
-									<a class="dropdown-item" href="{{ path('list_adresse_livraison') }}">Mes adresses de livraison</a>
-									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-								</div>
-
-							</li>
-
-						{% else %}
-							<li class="nav-item active">
-								<a class="nav-link text-white " href="{{ path('app_login') }}">Connexion
-									<span class="sr-only">(current)</span>
-								</a>
-							</li>
-						{% endif %}
-
-
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('panier')}}">Panier
-								<i class="fas fa-shopping-cart"></i>
-							</a>
-						</li>
-					</ul>
-
-				</div>
-			</nav>
-			<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-secondary">
-				<a class="navbar-brand" href="#">BOUTIKA</a>
+				<a class="navbar-brand" href="{{ path('acceuil') }}">BOUTIKA</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -108,6 +66,46 @@
 						</button>
 					</form>
 				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+
+				<div class="collapse navbar-collapse " id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto ">
+						{% if app.user %}
+							<li class="nav-item">Bienvenue
+								{{ app.user.username }}</li>
+							<li class="nav-item dropdown" style="z-index:10000">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte
+								</a>
+								<div class="dropdown-menu" style="z-index:10000;overflow: visible !important" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="{{ path('utilisateur_profil')}}">Mon
+																																																																																																												profil</a>
+									<a class="dropdown-item" href="/categories/2">Mes commandes</a>
+									<a class="dropdown-item" href="{{ path('list_adresse_livraison') }}">Mes adresses de livraison</a>
+									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+								</div>
+
+							</li>
+
+						{% else %}
+							<li class="nav-item active">
+								<a class="nav-link text-white " href="{{ path('app_login') }}">Connexion
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+						{% endif %}
+
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('panier')}}">Panier
+								<i class="fas fa-shopping-cart"></i>
+							</a>
+						</li>
+					</ul>
+
+				</div>
 			</nav>
 
 
@@ -131,8 +129,8 @@
 					<div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
 						<h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
 						<p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-																																																							consectetur
-																																																							adipisicing elit.</p>
+																																																																												consectetur
+																																																																												adipisicing elit.</p>
 					</div>
 					<!-- Grid column -->
 

@@ -244,7 +244,7 @@ public function see_commande_detail()
     //Total montant commande
     $total = $montant_panier+$frais_livraison;
     $session->set('total_commande',$total);
-    dd($session->get('total_commande'));
+   // dd($session->get('total_commande'));
      
     
     return $this->render('commandes/step3order.html.twig', array('lignes_panier'=>$lignes_panier, 
@@ -276,7 +276,7 @@ public function see_commande_detail()
 
         $new_commande = $session->get('commande');
 
-       //dd($session->get('type_livraison')->getId());
+       //dd($session->get('type_livraison'));
         $new_commande->setIdTypeLivraison($session->get('type_livraison'));
         
 
