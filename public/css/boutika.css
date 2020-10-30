@@ -1,0 +1,8 @@
+.embed-responsive .card-img-top {
+  object-fit: cover;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl{
+    padding-right: 0;
+    padding-left: 0;
+}

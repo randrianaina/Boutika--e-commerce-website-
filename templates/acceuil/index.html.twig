@@ -5,155 +5,161 @@
 
 {% block body %}
 
-	<!--Carousel Wrapper for Pictures-->
-	<div class="container">
+<!--Carousel Wrapper for Pictures-->
+<div class="container-fluid">
 
-		<div class="row">
-			<div class="col">
-				<div
-					id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
-					<!--Indicators-->
-					<ol class="carousel-indicators">
-						<li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-						<li data-target="#carousel-example-2" data-slide-to="1"></li>
-						<li data-target="#carousel-example-2" data-slide-to="2"></li>
-					</ol>
-					<!--/.Indicators-->
-					<!--Slides-->
-					<div class="container" style="width:100%">
-						<div class="carousel-inner" role="listbox">
-							<div class="carousel-item active">
-								<div class="view">
-									<img class="d-block w-100" src="{{ asset('img/acceuil/theme-inn-RCpjrS0ML0k-unsplash.jpg') }}" alt="First slide">
-									<div class="mask rgba-black-light"></div>
-								</div>
-								<div class="carousel-caption text-left">
-									<h1>Example headline.</h1>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-																												gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a>
-									</p>
-								</div>
+	<div class="row">
+		<div class="col">
+			<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+				<!--Indicators-->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-example-2" data-slide-to="1"></li>
+					<li data-target="#carousel-example-2" data-slide-to="2"></li>
+				</ol>
+				<!--/.Indicators-->
+				<!--Slides-->
+				<div class="container-fluid">
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="view">
+								<img class="d-block w-100"
+									src="{{ asset('img/acceuil/theme-inn-RCpjrS0ML0k-unsplash.jpg') }}"
+									alt="First slide">
+								<div class="mask rgba-black-light"></div>
 							</div>
-							<div
-								class="carousel-item">
-								<!--Mask color-->
-								<div class="view">
-									<img class="d-block w-100" src="{{ asset('img/acceuil/theme-inn-VQdgOEC6Tgc-unsplash.jpg') }}" alt="Second slide">
-									<div class="mask rgba-black-strong"></div>
-								</div>
-								<div class="carousel-caption">
-									<h1>Another example headline.</h1>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-																												gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a>
-									</p>
-								</div>
+							<div class="carousel-caption text-left">
+								<h1>Example headline.</h1>
+								<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+									porta
+									gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a>
+								</p>
 							</div>
-							<div
-								class="carousel-item">
-								<!--Mask color-->
-								<div class="view">
-									<img class="d-block w-100" src="{{ asset('img/acceuil/theme-inn-yPSbirjJWzs-unsplash.jpg') }}" alt="Third slide">
-									<div class="mask rgba-black-slight"></div>
-								</div>
-								<div class="carousel-caption text-right">
-									<h1>One more for good measure.</h1>
-									<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-																												gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-									<p>
-										<a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
-									</p>
-								</div>
+						</div>
+						<div class="carousel-item">
+							<!--Mask color-->
+							<div class="view">
+								<img class="d-block w-100"
+									src="{{ asset('img/acceuil/theme-inn-VQdgOEC6Tgc-unsplash.jpg') }}"
+									alt="Second slide">
+								<div class="mask rgba-black-strong"></div>
+							</div>
+							<div class="carousel-caption">
+								<h1>Another example headline.</h1>
+								<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+									porta
+									gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a>
+								</p>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<!--Mask color-->
+							<div class="view">
+								<img class="d-block w-100"
+									src="{{ asset('img/acceuil/theme-inn-yPSbirjJWzs-unsplash.jpg') }}"
+									alt="Third slide">
+								<div class="mask rgba-black-slight"></div>
+							</div>
+							<div class="carousel-caption text-right">
+								<h1>One more for good measure.</h1>
+								<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+									porta
+									gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
+								</p>
 							</div>
 						</div>
 					</div>
-					<!--/.Slides-->
-					<!--Controls-->
-					<a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-					<!--/.Controls-->
 				</div>
-			</div>
-		</div>
-
-
-		<!--/.Carousel Wrapper for Pictures-->
-		<!--Carousel Wrapper for Articles-->
-		<div class="row mx-auto my-auto">
-			<div
-				id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
+				<!--/.Slides-->
 				<!--Controls-->
-				<div class="controls-top">
-					<a class="btn-floating" href="#multi-item-example" data-slide="prev">
-						<i class="fas fa-chevron-left"></i>
-					</a>
-					<a class="btn-floating" href="#multi-item-example" data-slide="next">
-						<i class="fas fa-chevron-right"></i>
-					</a>
-				</div>
+				<a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
 				<!--/.Controls-->
-
-				<!--Indicators-->
-				<ol class="carousel-indicators ">
-					<li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-					<li data-target="#multi-item-example" data-slide-to="1"></li>
-					<li data-target="#multi-item-example" data-slide-to="2"></li>
-				</ol>
-				<!--/.Indicators-->
-
-				<!--Slides-->
-				<div class="carousel-inner " role="listbox">
-					{% set x = 0 %}
-					{% for article in articles %}
-
-						{% set x = x + 1 %}
-						{% if x == 1 %}
-							<!--First slide-->
-							<div class="carousel-item {{ loop.first ? 'active' : ''}}">
-								<div class="card-deck">
-								{% endif %}
-								<div class="card col-12 col-xl-3 h-100">
-									<img class="card-img-top embed-responsive embed-responsive-16by9" src="{{asset('img/' ~ article.getImageArticle)}}" alt="Card image cap">
-									<div class="card-body">
-										<h5 class="card-title">{{article.getLibelleArticle}}</h5>
-										<p class="card-text">{{article.getPrixTtcArticle}}
-											€</p>
-										<p class="card-text">
-											<small class="text-muted">Last updated 3 mins ago</small>
-										</p>
-									</div>
-								</div>
-
-								{% if x == 4 %}
-								</div>
-							</div>
-							{% set x = 0 %}
-						{% endif %}
-
-					{% endfor %}
-					<!--/.First slide-->
-
-				</div>
-
-
 			</div>
-			<!--/.Slides-->
-
 		</div>
 	</div>
 
 
-	<!--/.Carousel Wrapper for Articles-->
+	<!--/.Carousel Wrapper for Pictures-->
+	<!--Carousel Wrapper for Articles-->
+	<div class="row mx-auto my-auto">
+		<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+			<!--Controls-->
+			<div class="controls-top">
+				<a class="btn-floating" href="#multi-item-example" data-slide="prev">
+					<i class="fas fa-chevron-left"></i>
+				</a>
+				<a class="btn-floating" href="#multi-item-example" data-slide="next">
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			</div>
+			<!--/.Controls-->
+
+			<!--Indicators-->
+			<ol class="carousel-indicators ">
+				<li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+				<li data-target="#multi-item-example" data-slide-to="1"></li>
+				<li data-target="#multi-item-example" data-slide-to="2"></li>
+			</ol>
+			<!--/.Indicators-->
+
+			<!--Slides-->
+			<div class="carousel-inner " role="listbox">
+				{% set x = 0 %}
+				{% for article in articles %}
+
+				{% set x = x + 1 %}
+				{% if x == 1 %}
+				<!--First slide-->
+				<div class="carousel-item {{ loop.first ? 'active' : ''}}">
+					<div class="card-deck">
+						{% endif %}
+						<div class="card col-12 col-xl-3 h-100">
+							<img class="card-img-top embed-responsive embed-responsive-16by9"
+								src="{{asset('img/' ~ article.getImageArticle)}}" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">{{article.getLibelleArticle}}</h5>
+								<p class="card-text">{{article.getPrixTtcArticle}}
+									€</p>
+								<p class="card-text">
+									<small class="text-muted">Last updated 3 mins ago</small>
+								</p>
+							</div>
+						</div>
+
+						{% if x == 4 %}
+					</div>
+				</div>
+				{% set x = 0 %}
+				{% endif %}
+
+				{% endfor %}
+				<!--/.First slide-->
+
+			</div>
+
+
+		</div>
+		<!--/.Slides-->
+
+	</div>
+</div>
+
+
+<!--/.Carousel Wrapper for Articles-->
 
 
 {% endblock %}

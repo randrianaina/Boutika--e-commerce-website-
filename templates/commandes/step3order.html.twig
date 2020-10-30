@@ -18,7 +18,7 @@
 	</h2>
 {% endfor %}
 <h3>Type de livraison :
-	{{ type_livraison }}
+	{{ type_livraison.getLibelleLivraison}}
 </h3>
 {% if lignes_panier | length > 0 %}
 	<table

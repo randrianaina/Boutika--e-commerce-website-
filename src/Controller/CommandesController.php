@@ -117,7 +117,7 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
         $session->set('ad_livraison',$ad_livraison);
 
         //dd($session->get('id_ad_livraison'));
-        dd($session->get('ad_livraison'));
+        //dd($session->get('ad_livraison'));
         
         //dd($data);
         //dd($data);
@@ -172,6 +172,7 @@ public function select_type_livraison(Request $request, EntityManagerInterface $
         //getting the id and the price of the shipping adress
         foreach ($data as $type_livraison){
             //store the id on the session
+            $session->set('karazany_livraison', $type_livraison);
             $session->set('id_type_livraison', $type_livraison->getId());
             $session->set('lib_type_livraison', $type_livraison->getLibelleLivraison());
 
@@ -181,7 +182,7 @@ public function select_type_livraison(Request $request, EntityManagerInterface $
         }
         
         $session->set('type_livraison',$type_livraison);  
-        dd($session->get('type_livraison'));      //dd($session->get('id_type_livraison'));
+        //dd($session->get('type_livraison'));      //dd($session->get('id_type_livraison'));
         //dd($session->get('frais_type_livraison'));
 
         //dd($session->get('ad_livraison'));
@@ -227,19 +228,15 @@ public function see_commande_detail()
     dump($montant_panier);
 
     //Adresse de livraison (tableau)
-    $adresses_livraison = $session->get('data_ad_livraison');
-    foreach($adresses_livraison as $adresse_livraison ){
-        dump($adresse_livraison->getNomContact());
-        dump($adresse_livraison->getPrenomContact());
+    $adresses_livraison = $session->get('ad_livraison');
 
-    }
     
     //type de livraison
-    $type_livraison =  $session->get('lib_type_livraison');
+    $type_livraison =  $session->get('type_livraison');
 
     //frais de livraison
     $frais_livraison = $session->get('frais_type_livraison');
-    dump($frais_livraison);
+    //dump($frais_livraison);
 
     //Total montant commande
     $total = $montant_panier+$frais_livraison;
@@ -276,12 +273,15 @@ public function see_commande_detail()
 
         $new_commande = $session->get('commande');
 
+        $new_commande->setIdAdresseLivraison($session->get('ad_livraison'));
+        
+
        //dd($session->get('type_livraison'));
         $new_commande->setIdTypeLivraison($session->get('type_livraison'));
         
-
+        //dd( $new_commande);
         //dd($session->get('ad_livraison'));
-        $new_commande->setIdAdresseLivraison($session->get('ad_livraison'));
+        
         
         
         //dd($session);
