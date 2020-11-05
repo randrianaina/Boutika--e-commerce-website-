@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * @ORM\Entity(repositoryClass=UtilisateursRepository::class)
  * @UniqueEntity(fields={"email_utilisateur"}, message="There is already an account with this email_utilisateur")
@@ -24,6 +27,10 @@ class Utilisateurs implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     * message = "L'email '{{ value }}' n'est pas une adresse e-mail valide."
+     * )
+     * @Assert\NotBlank
      */
     private $email_utilisateur;
 
@@ -40,31 +47,38 @@ class Utilisateurs implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $civilite_utilisateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $nom_utilisateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $prenom_utilisateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $adresse_utilisateur;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type="digit", message="Le code postal {{ value }} n'est pas valide."
+     * )
      */
     private $cp_utilisateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $ville_utilisateur;
 

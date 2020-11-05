@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
@@ -16,13 +17,21 @@ class DetailsUtilisateursType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('civilite_utilisateur', TextType::class, ['disabled' => true])
-            ->add('nom_utilisateur', TextType::class)
-            ->add('prenom_utilisateur', TextType::class)
-            ->add('adresse_utilisateur', TextType::class)
-            ->add('cp_utilisateur', TextType::class)
-            ->add('ville_utilisateur' , TextType::class)
-            ->add('Enregistrer', SubmitType::class, ['label' => 'Enregistrer vos modifications'])
+            ->add('civilite_utilisateur', ChoiceType::class, ['choices'  => [
+                'Monsieur' =>'Mr',
+                'Madame' => 'Mme'
+            ],
+        ])
+            ->add('nom_utilisateur', TextType::class, [
+                'required' => true])
+            ->add('prenom_utilisateur', TextType::class, [
+                'required' => true])
+            ->add('adresse_utilisateur', TextType::class, [
+                'required' => true])
+            ->add('cp_utilisateur', TextType::class, [
+                'required' => true])
+            ->add('ville_utilisateur' , TextType::class, [
+                'required' => true])
         ;
     }
 

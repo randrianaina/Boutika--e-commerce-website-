@@ -81,25 +81,6 @@ class PanierController extends AbstractController
 
        $session->set('panier', $panier);
 
-
-      
-      // dump($tableau2[0]);
-      // dump($totalitem);
-       //dump($item);
-       dump($total);
-
-       /* foreach ($lignes_panier as $ligne_panier){
-        $ligne_panier->getPrixTtcArticle() * $session->get('panier')->getLignesPanier();
-       } */
-       dump($tableau);
-       dump($tableau2);
-       dump($lignes_panier);
-       dump($panier);
-       dump($session->get('panier'));
-      // dump($item['article']->getId());
-       
-       //dump(($ligne_panier->getPrixTtcArticle()) * ($session->get('panier')->getLignesPanier()));
-
         return $this->render('panier/index.html.twig', array('lignes_paniers'=> $lignes_panier, 'total_quantite'=>$total_quantite , 'Montant_total' =>$total));
     }
 
@@ -125,11 +106,7 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
         // Pour garder dans la SESSION l'etat actuel du $panier
 
-        //dump($session->get('panier'));
-
         return $this->redirectToRoute('articles');
-
-        //dump($session->get('panier'));
 
     }
 

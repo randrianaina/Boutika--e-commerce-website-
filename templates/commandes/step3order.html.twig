@@ -5,16 +5,16 @@
 
 {% block body %}
 <h1>Ma commande</h1>
-{% for adresse_livraison in adresses_livraison %}
+{% for ad_livraison in adresse_livraison %}
 	<h3>Livré à :
-		{{ adresse_livraison.getNomContact }}
-		{{ adresse_livraison.getPrenomContact }}
+		{{ ad_livraison.getNomContact }}
+		{{ ad_livraison.getPrenomContact }}
 	</h3>
 	<h2>
-		{{adresse_livraison.getAdresseContact}}</h2>
+		{{ad_livraison.getAdresseContact}}</h2>
 	<h2>
-		{{adresse_livraison.getCpContact}}
-		{{adresse_livraison.getVilleContact}}
+		{{ad_livraison.getCpContact}}
+		{{ad_livraison.getVilleContact}}
 	</h2>
 {% endfor %}
 <h3>Type de livraison :
@@ -52,4 +52,4 @@
 			{# Articles Image + nom #}
 		</tbody>
 	</tr>
-</td>{% endfor %}{# Quantité #}</tbody></table>{% endif %}<h2>Sous-total :{{ montant_panier }}€</h2><h2>Frais de livraison :{{ frais_de_livraison }}€</h2><h1>Total :{{ total }}{% endblock %}
+</td>{% endfor %}{# Quantité #}</tbody></table>{% endif %}<h2>Sous-total :{{ montant_panier }}€</h2><h2>Frais de livraison :{{ frais_de_livraison }}€</h2><h1>Total :{{ total }} </h1>{% endblock %}

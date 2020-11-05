@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes
+{% endblock %}
+
+{% block body %}
+	{% for commande in commandes %}
+		<div class="card">
+			<h5 class="card-header">Mes commandes</h5>
+			<div class="card-body">
+				<p class="card-text">
+					Date de la commande :
+					{{ commande.getDateCommande|date("m/d/Y")}}
+				</p>
+				<p class="card-text">
+					Type de livraison :
+					{{ commande.getIdTypeLivraison.getLibelleLivraison}}
+				</p>
+				<p class="card-text">
+					Adresse de livraison:
+					{{ commande.getIdAdresseLivraison.getNomContact }}
+					{{ commande.getIdAdresseLivraison.getPrenomContact }}
+					{{ commande.getIdAdresseLivraison.getAdresseContact }}
+					{{ commande.getIdAdresseLivraison.getCpContact }}
+					{{ commande.getIdAdresseLivraison.getVilleContact }}
+				</p>
+				<p class="card-text">
+					Montant de la commande :
+					{{ commande.getMontantCommande }} €
+				</p>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

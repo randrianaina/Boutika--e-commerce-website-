@@ -71,7 +71,7 @@ class FormulaireConnexionAuthenticator extends AbstractFormLoginAuthenticator im
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email_utilisateur non trouvé.');
+            throw new CustomUserMessageAuthenticationException('Email non reconnu !');
         }
 
         return $user;

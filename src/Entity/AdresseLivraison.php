@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\AdresseLivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=AdresseLivraisonRepository::class)
  */
@@ -19,26 +21,32 @@ class AdresseLivraison
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $nom_contact;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $prenom_contact;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $adresse_contact;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(type="digit", message="Le code postal {{ value }} n'est pas valide."
+     * )
      */
     private $cp_contact;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $ville_contact;
 

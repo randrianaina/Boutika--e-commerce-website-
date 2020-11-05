@@ -69,6 +69,33 @@ class ArticlesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/categories", name="categories")
+     */
+    public function AllCategories()
+    {   
+        $depot= $this->getDoctrine()->getRepository(Categories::class);
+        $categories = $depot->findAll();
+
+        return $this->render('articles/categories/index.html.twig', ['categories' =>$categories
+        ]);
+    }
+
+
+    /**
+     * @Route("/article/{id}/details", name="article_details")
+     */
+    public function Details($id)
+    {
+        $Article = $this->getDoctrine()
+        ->getRepository(Articles::class)
+        ->find($id);
+
+
+
+        return $this->render('articles/details.html.twig', ['article' =>$Article
+        ]);
+    }
 
 
   

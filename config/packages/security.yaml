@@ -1,9 +1,7 @@
 security:
     encoders:
-        App\Entity\Utilsateurs:
-            algorithm: auto
-        App\Entity\Utilisateurs:
-            algorithm: auto
+        App\Entity\Utilsateurs: bcrypt
+        App\Entity\Utilisateurs: bcrypt
 
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

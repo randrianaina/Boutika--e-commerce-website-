@@ -4,19 +4,29 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Ajouter des informations</h1>
+	<h1>Ajouter/éditer mes informations</h1>
 
 	{{ form_start(userForm) }}
 	{{ form_row(userForm.civilite_utilisateur, {
-            label: 'Utilisateur civilite_utilisateur'
+            label: 'Civitilité  '
         }) }}
-	{{ form_row(userForm.nom_utilisateur) }}
-	{{ form_row(userForm.prenom_utilisateur) }}
-	{{ form_row(userForm.adresse_utilisateur) }}
-	{{ form_row(userForm.cp_utilisateur) }}
-	{{ form_row(userForm.ville_utilisateur) }}
+	{{ form_row(userForm.nom_utilisateur, {
+            label: 'Nom  '
+        }) }}
+	{{ form_row(userForm.prenom_utilisateur, {
+            label: 'Prénom  '
+        }) }}
+	{{ form_row(userForm.adresse_utilisateur, {
+            label: 'Adresse  '
+        }) }}
+	{{ form_row(userForm.cp_utilisateur, {
+            label: 'Code postal  '
+        }) }}
+	{{ form_row(userForm.ville_utilisateur, {
+            label: 'Ville  '
+        }) }}
 
-	<button type="submit" class="btn btn-primary">Update!</button>
+	<button type="submit" class="btn btn-primary">Enregister</button>
 	{{ form_end(userForm) }}
 
 {% endblock %}

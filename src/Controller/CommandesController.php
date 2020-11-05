@@ -8,6 +8,7 @@ use App\Entity\Commandes;
 use App\Entity\Utilisateurs;
 use App\Entity\AdresseLivraison;
 use App\Entity\TypesLivraison;
+use App\Entity\LigneCommandes;
 
 
 use App\Form\AddAdresseLivraisonType;
@@ -27,6 +28,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+//utilisation de SensioFrameworkExtraBundle pour l'utilisation d'annotations pour limiter l'accès à certains contrôlleurs
+    //voir https://symfony.com/doc/current/security.html#security-securing-controller
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 
@@ -37,6 +41,9 @@ class CommandesController extends AbstractController
 
     /**
      * @Route("/commande/all", name="all_commande")
+     * Require ROLE_USER for *every* controller method in this class.
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function list_commande()
     {
@@ -81,6 +88,9 @@ class CommandesController extends AbstractController
 
 /**
  * @Route("/utilisateur/commande/etape1", name="commande_etape1")
+ * Require ROLE_USER for *every* controller method in this class.
+ *
+ * @IsGranted("ROLE_USER")
  */
 public function select_adresse_livraison(Request $request, EntityManagerInterface $em)
 {
@@ -89,14 +99,8 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
     $session->set('utilisateur', $this->getUser());
     $session->get('utilisateur');
 
-    $id = ($session->get('utilisateur')->getId());
+    $id = $this->getUser()->getId();
     
-   /*  $adresses_livraison = $this->getDoctrine()
-    ->getRepository(AdresseLivraison::class)
-    ->findBy(array('id_utilisateur' => $id)); */
-
-   /*  $adresse = new AdresseLivraison();
- */
     $form = $this->createForm(SelectAdresseLivraisonType::class/* , $adresse */);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
@@ -105,109 +109,51 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
         //getData() method store data without a class
         $data= $form->getData();
 
-
         //store the selected shipping adress
-        $session->set('data_ad_livraison', $data);
-
-
-        //getting the id of the shipping adress
-        foreach ($data as $ad_livraison){
-            $session->set('id_ad_livraison', $ad_livraison->getId());
-        }
-        $session->set('ad_livraison',$ad_livraison);
-
-        //dd($session->get('id_ad_livraison'));
-        //dd($session->get('ad_livraison'));
-        
-        //dd($data);
-        //dd($data);
-        
-        /* dd($adresse); 
-        $em->persist($adresse);
-
-        
-        $em->flush(); */
+        $session->set('adresse_livraison', $data['adresselivraison']);
 
         $this->addFlash('success', 'Adresse sélectionnée !');
 
-        
         return $this->redirectToRoute('Commande_etape2');
 }
-    
     return $this->render('commandes/step1order.html.twig', ['select_adresse_livraison_Form' => $form->createView()
     ]);
 }
 
 /**
  * @Route("/utilisateur/commande/etape2", name="Commande_etape2")
+ * Require ROLE_USER for *every* controller method in this class.
+ *  
+ * @IsGranted("ROLE_USER")
  */
 public function select_type_livraison(Request $request, EntityManagerInterface $em)
 {
     $session = new Session();
 
-   /*  $session->set('utilisateur', $this->getUser());
-    $session->get('utilisateur');
-
-    $id = ($session->get('utilisateur')->getId());
-     */
-   /*  $adresses_livraison = $this->getDoctrine()
-    ->getRepository(AdresseLivraison::class)
-    ->findBy(array('id_utilisateur' => $id)); */
-
-   /*  $adresse = new AdresseLivraison();
- */
-    $form = $this->createForm(SelectTypeLivraisonType::class/* , $adresse */);
+    $form = $this->createForm(SelectTypeLivraisonType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         
         //https://symfony.com/doc/current/form/without_class.html
         //getData() method store data without a class
         $data= $form->getData();
-        //dd($data);
 
         //store the selected shipping adress
-        $session->set('data_type_livraison', $data);
-
-        //dd($session->get('data_type_livraison'));
-        //getting the id and the price of the shipping adress
-        foreach ($data as $type_livraison){
-            //store the id on the session
-            $session->set('karazany_livraison', $type_livraison);
-            $session->set('id_type_livraison', $type_livraison->getId());
-            $session->set('lib_type_livraison', $type_livraison->getLibelleLivraison());
-
-
-            //store the price on the session
-            $session->set('frais_type_livraison', $type_livraison->getFraisLivraison());
-        }
+        $session->set('type_livraison', $data['type_livraison']);
         
-        $session->set('type_livraison',$type_livraison);  
-        //dd($session->get('type_livraison'));      //dd($session->get('id_type_livraison'));
-        //dd($session->get('frais_type_livraison'));
-
-        //dd($session->get('ad_livraison'));
-        
-        //dd($data);
-        //dd($data);
-        
-        /* dd($adresse); 
-        $em->persist($adresse);
-
-        
-        $em->flush(); */
-
         $this->addFlash('success', 'Adresse sélectionnée !');
 
-        
         return $this->redirectToRoute('Commande_etape3');
 }
-    
     return $this->render('commandes/step2order.html.twig', ['select_type_livraison_Form' => $form->createView()
     ]);
 }
 
 /**
  * @Route("/utilisateur/commande/etape3", name="Commande_etape3")
+ * Require ROLE_USER for *every* controller method in this class.
+ *  
+ * @IsGranted("ROLE_USER")
  */
 public function see_commande_detail()
 {
@@ -228,7 +174,7 @@ public function see_commande_detail()
     dump($montant_panier);
 
     //Adresse de livraison (tableau)
-    $adresses_livraison = $session->get('ad_livraison');
+    $adresse_livraison = $session->get('adresse_livraison');
 
     
     //type de livraison
@@ -236,21 +182,50 @@ public function see_commande_detail()
 
     //frais de livraison
     $frais_livraison = $session->get('frais_type_livraison');
-    //dump($frais_livraison);
 
     //Total montant commande
     $total = $montant_panier+$frais_livraison;
+   
     $session->set('total_commande',$total);
-   // dd($session->get('total_commande'));
      
-    
     return $this->render('commandes/step3order.html.twig', array('lignes_panier'=>$lignes_panier, 
-    'montant_panier'=>$montant_panier, 'adresses_livraison'=>$adresses_livraison, 'type_livraison'=>$type_livraison,'frais_de_livraison'=>$frais_livraison, 'total'=>$total ));
+    'montant_panier'=>$montant_panier, 'adresse_livraison'=>$adresse_livraison, 'type_livraison'=>$type_livraison,'frais_de_livraison'=>$frais_livraison, 'total'=>$total ));
 }
 
+/**
+ * @Route("/utilisateur/commandes", name="commandes")
+ * Require ROLE_USER for *every* controller method in this class.
+ *  
+ * @IsGranted("ROLE_USER")
+ */
+public function see_commandes()
+{
+    $session = new Session();
+    $id = $this->getUser()->getId();
+    $commandes = $this->getDoctrine()
+    ->getRepository(Commandes::class)
+    ->findBy(array('id_utilisateur' => $id));
+
+    foreach ($commandes as $commande){
+        
+        $id_type_livraison=$commande->getIdTypeLivraison()->getId();
+        $id_adresse_livraison=$commande->getIdAdresseLivraison()->getId();
+    }
+
+    $adresses_livraison = $this->getDoctrine()
+    ->getRepository(AdresseLivraison::class)
+    ->findBy(array('id_utilisateur' => $id));
+    
+    return $this->render('utilisateurs/orders.html.twig', [
+        'commandes' => $commandes
+    ]);
+}
 
     /**
      * @Route("/commande/new", name="new_commande")
+     * Require ROLE_USER for *every* controller method in this class.
+     *   
+     * @IsGranted("ROLE_USER")
      */
     public function new_commande(EntityManagerInterface $em)
     {   
@@ -262,75 +237,32 @@ public function see_commande_detail()
         $date = date('d F Y', time());
         $id_utilisateur = $this->getUser()->getId();
         $session = new Session();
-        //date_default_timezone_set('Australia/Melbourne');
-        //dd($session->get('id_type_livraison'));
-
-        $new_commande = $session->get('commande');
-
-        if (!$session->get('commande')) {
-            $session->set('commande', new Commandes());
-        }
-
-        $new_commande = $session->get('commande');
-
-        $new_commande->setIdAdresseLivraison($session->get('ad_livraison'));
         
+        $new_commande = new Commandes();
+        
+        $adresselivraison = $this->getDoctrine()
+            ->getRepository(AdresseLivraison::class)
+            ->findById($session->get('adresse_livraison')->getId());
 
-       //dd($session->get('type_livraison'));
-        $new_commande->setIdTypeLivraison($session->get('type_livraison'));
+        //dd($session->get('type_livraison'));
+        $typeLivraison = $this->getDoctrine()
+            ->getRepository(TypesLivraison::class)
+            ->findById($session->get('type_livraison')->getId());
         
-        //dd( $new_commande);
-        //dd($session->get('ad_livraison'));
-        
-        
-        
-        //dd($session);
-        
-
-        //
-
+        $new_commande->setIdTypeLivraison($typeLivraison[0]);
+        $new_commande->setIdAdresseLivraison($adresselivraison[0]);
         $new_commande->setMontantCommande($session->get('total_commande'));
+        
         //create an object that implements the DateTimeInterface
         $new_commande->setDateCommande(\DateTime::createFromFormat('d F Y', $date));
         $new_commande->setIdUtilisateur($this->getUser());
 
         $session->set('commande', $new_commande);
 
-        //dd($new_commande);
-        //$new_format_date = date('Y-m-d', time());
-        /* dd(strftime("%A %d %B %G", strtotime($date)));
-        dd($date); */
-        
-        /* $newdate = date('Y-m-d',strtotime($date[0]));
-        dd($newdate);
-         *///dd(getdate());
-        //dd($date[0]);
-        //$datetoaday = $date->setTimestamp()
-       
-        //$newdate = $date[0]->format('U = Y-m-d H:i:s') . "\n";
-        //dd($newdate);
-
-        
-
-        /* $panier=($session->get('panier'));
-        
-
-        $new_commande = new Commandes();
- */
-       
-       /*  $new_commande->setIdTypeLivraison(2);
-        $new_commande->setIdAdresseLivraison(3);*/
-       // $new_commande->setMontantCommande($session->get('panier')->getMontantPanier());
-        //dd($new_commande);
         $em = $this->getDoctrine()->getManager();
-      $em->persist($new_commande);
-    $em->flush(); 
-        //dd($id_utilisateur);
+        $em->persist($new_commande);
+        $em->flush(); 
         
-        dd($session->get('commande'));
-
-        
-
         return $this->render('commandes/index.html.twig', [
             'controller_name' => 'CommandesController',
         ]);

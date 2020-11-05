@@ -16,12 +16,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+//utilisation de SensioFrameworkExtraBundle pour l'utilisation d'annotations pour limiter l'accès à certains contrôlleurs
+    //voir https://symfony.com/doc/current/security.html#security-securing-controller
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+
 
 class UtilisateursController extends AbstractController
 {   
 
     /**
      * @Route("/utilisateur/profil", name="utilisateur_profil")
+     * Require ROLE_USER for *every* controller method in this class.
+     *   
+     * @IsGranted("ROLE_USER")
      */
     public function see_details()
     {
@@ -55,6 +63,9 @@ class UtilisateursController extends AbstractController
 
     /**
      * @Route("/utilisateur/{id}/edit", name="utilisateur_edit")
+     * Require ROLE_USER for *every* controller method in this class.
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function add_details(Utilisateurs $utilisateur, Request $request, EntityManagerInterface $em)
     {
@@ -70,9 +81,7 @@ class UtilisateursController extends AbstractController
 
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
 
-            return $this->redirectToRoute('utilisateur_edit', [
-                'id' => $utilisateur->getId(),
-            ]);
+            return $this->redirectToRoute('utilisateur_profil');
         }
 
 
@@ -84,6 +93,9 @@ class UtilisateursController extends AbstractController
 
     /**
      * @Route("/utilisateur/adresses_livraison", name="list_adresse_livraison")
+     * Require ROLE_USER for *every* controller method in this class.
+     *  
+     * @IsGranted("ROLE_USER")
      */
     public function see_shipping_address()
     {
@@ -95,9 +107,7 @@ class UtilisateursController extends AbstractController
 
         dump($this->getUser()->getId());
         dump($id);
-    /*  dump($session->get('utilisateur'));
-        dump($session->get('utilisateur')->getEmailUtilisateur());
-*/
+
         $adresses_livraison = $this->getDoctrine()
         ->getRepository(AdresseLivraison::class)
         ->findBy(array('id_utilisateur' => $id));

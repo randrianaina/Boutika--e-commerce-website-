@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticlesController!
+{% endblock %}
+
+{% block body %}
+<!-- <div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="img/{{article.getImageArticle}}" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{article.getLibelleArticle}}</h5>
+                <p class="card-text">{{article.getDescriptionArticle}}</p>
+                <p class="card-text">{{article.getPrixTtcArticle}} €</p>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+<!-- <div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1"><img
+                                src="{{asset('img/' ~ article.getImageArticle)}}" /></div>
+                    </div>
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="product-title">{{article.getLibelleArticle}}</h3>
+                    <p class="product-description">{{article.getDescriptionArticle}}</p>
+                    <h4 class="price">Prix : <span>{{article.getPrixTtcArticle}} €</span></h4>
+                    <div class="action">
+                        <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                        <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!--Section: Block Content-->
+<section class="mb-5">
+    <div class="card bg-light">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+
+                    <div id="mdb-lightbox-ui"></div>
+
+                    <div class="mdb-lightbox">
+
+                        <div class="row product-gallery mx-1">
+
+                            <div class="col-12 mb-0">
+                                <figure class="view overlay rounded z-depth-1 main-img">
+                                    <a href="{{asset('img/' ~ article.getImageArticle)}}" data-size="710x823">
+                                        <img src="{{asset('img/' ~ article.getImageArticle)}}"
+                                            class="img-fluid z-depth-1">
+                                    </a>
+                                </figure>
+
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="view overlay rounded z-depth-1 gallery-item">
+                                            <img src="{{asset('img/' ~ article.getImageArticle)}}" class="img-fluid">
+                                            <div class="mask rgba-white-slight"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+                    <h5>{{article.getLibelleArticle}}</h5>
+
+
+                    <p><span class="mr-1"><strong>{{article.getPrixTtcArticle}} €</strong></span></p>
+                    <p class="pt-1">{{article.getDescriptionArticle}}</p>
+
+                    <hr>
+                    <div class="table-responsive mb-2">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td class="pl-0 pb-0 w-25">Quantité</td>
+                                </tr>
+                                <tr>
+                                    <td class="pl-0">
+                                        <div class="def-number-input number-input safari_only mb-0">
+                                            <button
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                class="minus"></button>
+                                            <input class="quantity" min="0" name="quantity" value="1" type="number">
+                                            <button
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                class="plus"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Buy now</button>
+                    <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
+                            class="fas fa-shopping-cart pr-2"></i>Add to
+                        cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section: Block Content-->
+
+{% endblock %}
