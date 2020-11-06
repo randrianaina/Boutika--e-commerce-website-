@@ -5,15 +5,15 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container mt-5">
 	<div class="row">
 		{% for article in articles %}
 		{# CARD #}
 		<div class="col-md-6 col-lg-4 col-12">
 			<div class="card-deck">
 				<div class="card mb-2 m-3">
+					<h5 class="card-title text-center pt-3">{{article.getLibelleArticle}}</h5>
 					<div class="card-body">
-						<h5 class="card-title text-center">{{article.getLibelleArticle}}</h5>
 						<div class="text-center">
 							<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top " alt="">
 						</div>

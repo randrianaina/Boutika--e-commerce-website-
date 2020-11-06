@@ -26,7 +26,7 @@
 	<header class="container-fluid">
 		<div class="row">
 			{# NAVBAR #}
-			<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info">
+			<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info ">
 
 				<a class="navbar-brand" href="{{ path('acceuil') }}">BOUTIKA</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -109,16 +109,17 @@
 				</div>
 			</nav>
 		</div>
-
-
 	</header>
 
 	{% block body %}{% endblock %}
 
 	<!-- Footer -->
 	<footer class="container">
-		<p class="float-right"><a href="#">Back to top</a></p>
-		<p>© 2017-2018 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+		<div class="row d-flex flex-row justify-content-around mt-5">
+			<p><a href="#">Back to top</a></p>
+			<p>© 2017-2018 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+
+		</div>
 	</footer>
 	<!-- Footer -->
 

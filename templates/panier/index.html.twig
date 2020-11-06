@@ -6,80 +6,95 @@
 {% block body %}
 
 {% if lignes_paniers | length > 0 %}
-<table class="table table-hover">
-	{# En-tête tableau #}
-	<thead class="thead-light">
-		<tr>
-			<th colspan="2" class="text-center">Article Designation</th>
-			<th class="text-center">Prix unitaire TTC</th>
-			<th class="text-center">Quantity</th>
-			<th class="text-center">Prix TTC</th>
-			<th class="text-center">Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for ligne_panier in lignes_paniers %}
-		<tr>
-			<td class="text-success text-center">{{ligne_panier.getLibelleArticle}}</td>
-			{# Prix Unitaire #}
-			<td class="text-success text-center">{{ligne_panier.getPrixTtcArticle}}€</td>
 
-			<td>
-				<button type="button" class="btn btn-outline-success border-0">
-					<a href="{{ path ('panier_art_++', {'id': ligne_panier.getId})}}" class="text-success">
-						<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-dash-circle-fill"
-							fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd"
-								d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
-						</svg>
-					</a>
-				</button>
-				{{ app.session.get('panier').getLignesPanier[ligne_panier.getId] }}
-				<button type="button" class="btn btn-outline-success border-0">
-					<a href="{{ path ('panier_art_--', {'id': ligne_panier.getId})}}" class="text-success">
-						<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-plus-circle-fill"
-							fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd"
-								d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-						</svg>
-					</a>
-				</button>
-			</td>
+<div id="panierContainer">
+	<div>
+		<table class="table table-hover">
+			{# En-tête tableau #}
+			<thead class="thead-light">
+				<tr>
+					<th colspan="2" class="text-center">Article Designation</th>
+					<th class="text-center">Prix unitaire TTC</th>
+					<th class="text-center">Quantity</th>
+					<th class="text-center">Prix TTC</th>
+					<th class="text-center">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ligne_panier in lignes_paniers %}
+				<tr>
+					<td class="text-success text-center">{{ligne_panier.getLibelleArticle}}</td>
+					{# Prix Unitaire #}
+					<td class="text-success text-center">{{ligne_panier.getPrixTtcArticle}}€</td>
 
-			<td>
-				{{ (ligne_panier.getPrixTtcArticle * app.session.get('panier').getLignesPanier[ligne_panier.getId]) }}
+					<td>
+						<button type="button" class="btn btn-outline-success border-0">
+							<a href="{{ path ('panier_art_++', {'id': ligne_panier.getId})}}" class="text-success">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-dash-circle-fill"
+									fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd"
+										d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
+								</svg>
+							</a>
+						</button>
+						{{ app.session.get('panier').getLignesPanier[ligne_panier.getId] }}
+						<button type="button" class="btn btn-outline-success border-0">
+							<a href="{{ path ('panier_art_--', {'id': ligne_panier.getId})}}" class="text-success">
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-plus-circle-fill"
+									fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd"
+										d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+								</svg>
+							</a>
+						</button>
+					</td>
+
+					<td>
+						{{ (ligne_panier.getPrixTtcArticle * app.session.get('panier').getLignesPanier[ligne_panier.getId]) }}
+						€
+					</td>
+
+					{# Articles Image + nom #}
+				</tr>
+				{% endfor %}
+
+
+
+				{# Quantité #}
+
+			</tbody>
+		</table>
+
+		{% if total_quantite is defined %}
+		<div class="d-flex justify-content-around">
+			<p>Quantité total articles=
+				{{total_quantite}}
+			</p>
+
+			{% endif %}
+
+			<p>
+				Montant =
+				{{Montant_total}}
 				€
-			</td>
+			</p>
+		</div>
+		<div class="mx-auto">
+			<a href="{{ path('commande_etape1')}}" class="m-5">
+				<button type="submit" class="boutonPanier p-3 mt-3 ">Commander</button>
+			</a>
 
-			{# Articles Image + nom #}
-		</tr>
-		{% endfor %}
+		</div>
 
-
-
-		{# Quantité #}
-	</tbody>
-</table>
-{% if total_quantite is defined %}
-<p>Quantité total articles=
-	{{total_quantite}}
-</p>
-{% endif %}
-<p>
-	Montant =
-	{{Montant_total}}
-	€
-</p>
-{% else %}
-<div class="card text-center">
-	<div class="card-header">
-		Info
+		{% else %}
+		<div class="panier mx-auto py-5 w-75 border border-light rounded text-center">
+			<h5 class="mb-5">Votre panier est vide</h5>
+			<a href="{{ path('articles')}}" class="boutonPanier p-3 mt-3">Boutique</a>
+		</div>
 	</div>
-	<div class="card-body">
-		<h5 class="card-title">Votre panier est vide</h5>
-		<p class="card-text">Votre panier est vide.</p>
-		<a href="#" class="btn btn-primary">Boutique</a>
-	</div>
+
 
 </div>
-{% endif %}{% endblock %}
+
+{% endif %}
+{% endblock %}

@@ -7,35 +7,52 @@
     padding-left: 0;
 }  */
 
+
+body {
+  margin-top: 68px;
+}
+
 .carousel-item {
     height: 65vh; 
-    min-height: 600px;
+    min-height: 800px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     width: 100%;
-}
+  }
 
 .navbar{
   width: 100%;
 
 }
 
+.first-slide, .second-slide, .third-slide {
+  margin-top: -150px;
+}
 
-  
- /*  .page-footer {
-    width: 100%;
-    height: auto;
-    position: fixed; 
-    bottom: 0;
-    left: 0;
-    right: 0;
-  } */
 
- /*  body {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    color: #5a5a5a;
-  } */
+
+
+/* PANIER */
+#panierContainer{
+  height: 900px;
+}
+
+.panier {
+  margin-top: 100px;
+}
+
+.boutonPanier {
+  background-color: #dab989;
+  background-image: url("https://www.transparenttextures.com/patterns/purty-wood.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */  color: #fff;
+  border: none;
+  border-radius: 10px;
+}
+
+footer {
+  position: sticky;
+  bottom: 15px; 
+}
