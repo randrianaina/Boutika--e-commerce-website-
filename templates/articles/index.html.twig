@@ -5,30 +5,36 @@
 
 {% block body %}
 
-	<div>
+<div class="container">
+	<div class="row">
 		{% for article in articles %}
-			{# CARD #}
-			<div class="card d-inline-flex m-3" style="width: 18rem; ">
-				<div class="card-body">
-					<h5 class="card-title text-center">{{article.getLibelleArticle}}</h5>
-					<div class="text-center">
-						<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top " alt="">
+		{# CARD #}
+		<div class="col-md-6 col-lg-4 col-12">
+			<div class="card-deck">
+				<div class="card mb-2 m-3">
+					<div class="card-body">
+						<h5 class="card-title text-center">{{article.getLibelleArticle}}</h5>
+						<div class="text-center">
+							<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top " alt="">
+						</div>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item text-center text-success">{{article.getPrixTtcArticle}}
+							€</li>
+					</ul>
+					<div class="card-body">
+						{# Bouton clic panier #}
+						<a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
+							class="card-link text-warning mx-3">
+							{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
+							{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
+						</a>
+
 					</div>
 				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item text-center text-success">{{article.getPrixTtcArticle}}
-						€</li>
-				</ul>
-				<div
-					class="card-body">
-					{# Bouton clic panier #}
-					<a href="{{ path ('panier_art_add',{'id': article.getId}) }}" class="card-link text-warning mx-3">
-						{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
-						{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
-					</a>
-
-				</div>
 			</div>
+		</div>
 		{% endfor %}
 	</div>
+</div>
 {% endblock %}
