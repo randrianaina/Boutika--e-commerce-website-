@@ -9,13 +9,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class AcceuilController extends AbstractController
 {
     /**
      * @Route("/", name="acceuil")
      */
-    public function Acceuil()
+    public function Acceuil(Request $request, $_route)
     {
         $session = new Session();
 
@@ -44,8 +45,12 @@ class AcceuilController extends AbstractController
             dump($session->get('user'));
             dump($session->get('Utilisateurs'));
             //dd($this->getUser());
+            //dd($_route);
+            /* $path = $request->getUri(); */
 
+            $session->set('current_uri',$_route);
 
+            //dd($session->get('current_uri'));
 
         return $this->render('acceuil/index.html.twig', ['articles' => $articles,
             'controller_name' => 'AcceuilController',

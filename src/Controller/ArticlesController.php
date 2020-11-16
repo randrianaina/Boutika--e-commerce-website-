@@ -17,7 +17,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/articles", name="articles")
      */
-    public function All()
+    public function All(Request $request, $_route)
     {
         $session = new Session();
 
@@ -28,6 +28,9 @@ class ArticlesController extends AbstractController
             throw $this->createNotFoundException('Pas d\'articles trouvés ...!');
         }
 
+        /* $path = $request->getUri(); */
+
+        $session->set('current_uri',$_route);
         //dump($session->get('panier'));
 
         return $this->render('articles/index.html.twig', ['articles'=>$articles,

@@ -30,9 +30,11 @@ class SelectAdresseLivraisonType extends AbstractType
     {
         $builder
             ->add('adresselivraison', EntityType::class, [
+                
                 'class' => AdresseLivraison::class,
                 'multiple' => false,
                 'expanded' => true,
+                "label_attr" => ["class" => "radio-custom"],
                 'choice_label' => function (AdresseLivraison $adresse_livraison){
                     return sprintf (' %s %s %s %d %s ', $adresse_livraison->getNomContact(), 
                     $adresse_livraison->getPrenomContact(), $adresse_livraison->getAdresseContact(),

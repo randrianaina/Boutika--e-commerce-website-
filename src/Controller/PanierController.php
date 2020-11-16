@@ -19,7 +19,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function all(SessionInterface $session)
+    public function all(SessionInterface $session, Request $request, $_route)
     {
         $session = new Session();
             
@@ -43,6 +43,8 @@ class PanierController extends AbstractController
 
         $total_quantite = array_sum($panier->getLignesPanier());
         dump($total_quantite);
+
+        $session->set('total_quantite' ,$total_quantite);
 
     }
       /*   */
@@ -81,13 +83,15 @@ class PanierController extends AbstractController
 
        $session->set('panier', $panier);
 
+       dump($_route);
+
         return $this->render('panier/index.html.twig', array('lignes_paniers'=> $lignes_panier, 'total_quantite'=>$total_quantite , 'Montant_total' =>$total));
     }
 
     /**
      * @Route("/panier/{id}/add" , name="panier_art_add")           //Convention name: controllername_methode
      */
-    public function add($id, SessionInterface $session)
+    public function add($id, Request $request, $_route)
     {
         $session = new Session();
 
@@ -106,7 +110,19 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
         // Pour garder dans la SESSION l'etat actuel du $panier
 
-        return $this->redirectToRoute('articles');
+        //dd($_route);
+
+        $path = $request->getUri();
+
+        /* dd($path); */
+
+        //dd($session->get('current_uri'));
+
+        /* $path = $request->getUri();
+
+        $session->set('current_uri',$path); */
+
+        return $this->redirectToRoute($session->get('current_uri'));
 
     }
 

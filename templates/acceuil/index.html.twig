@@ -5,52 +5,46 @@
 
 {% block body %}
 <!-- <main role="main"> -->
-<div class="container-fluid p-0  ">
-	<div class="row m-0 p-0 w-100">
+<section class="container-fluid p-0">
+	<div class="row mx-auto my-auto p-0 w-100">
 		<!-- CAROUSSEL TOP -->
-		<div id="myCarousel" class="carousel slide m-0 w-100 " data-ride=" carousel">
+		<div id="myCarousel" class="carousel slide mx-auto w-100 " data-ride=" carousel">
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				<li data-target=" #myCarousel" data-slide-to="1" class=""></li>
 				<li data-target=" #myCarousel" data-slide-to="2" class=""></li>
 			</ol>
-			<div class=" carousel-inner m-0 w-100">
+			<div id="accueil_carousel" class="carousel-inner w-100">
 				<div class="carousel-item active mx-auto ">
 					<img class="first-slide" src="{{ asset('img/acceuil/theme-inn-RCpjrS0ML0k-unsplash.jpg') }}"
 						alt="First slide">
 					<div class="">
 						<div class="carousel-caption text-left">
-							<h1>Example headline.</h1>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
-								porta
-								gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-							<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+							<h1>SACS</h1>
+							<p>Notre séléction de sacs</p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/1" role="button">En savoir plus</a></p>
 						</div>
 					</div>
 				</div>
 				<div class="carousel-item">
 					<img class="second-slide" src="{{ asset('img/acceuil/theme-inn-VQdgOEC6Tgc-unsplash.jpg') }}"
 						alt="Second slide">
-					<div class="container">
+					<div class="container-fluid">
 						<div class="carousel-caption">
-							<h1>Another example headline.</h1>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
-								porta
-								gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-							<p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+							<h1>DECO</h1>
+							<p>Notre sélection DECO</p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/2" role="button">En savoir plus</a></p>
 						</div>
 					</div>
 				</div>
 				<div class="carousel-item">
 					<img class="third-slide" src="{{ asset('img/acceuil/theme-inn-yPSbirjJWzs-unsplash.jpg') }}"
 						alt="Third slide">
-					<div class="container">
+					<div class="container-fluid">
 						<div class="carousel-caption text-right">
-							<h1>One more for good measure.</h1>
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
-								porta
-								gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-							<p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+							<h1>MODE</h1>
+							<p>Notre sélection MODE</p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/3" role="button">En savoir plus</a></p>
 						</div>
 					</div>
 				</div>
@@ -66,7 +60,7 @@
 		</div>
 	</div>
 	<!-- CAROUSSEL ARTICLES -->
-	<div class="row">
+	<div class="row mx-auto my-auto">
 		<!--Carousel Wrapper for Articles-->
 		<div class="d-flex flex-row mt-5 mx-auto">
 			<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -91,8 +85,9 @@
 					<div class="carousel-item {{ loop.first ? 'active' : ''}} ">
 						<div class="card-deck">
 							{% endif %}
-							<div class="">
-								<div class="">
+							<div
+								class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mx-auto my-auto">
+								<div class="col mb-4">
 									<div class="card m-3" style="width: 18rem">
 										<a href="/article/{{article.getId}}/details">
 											<h5 class="card-title text-center mt-3">{{article.getLibelleArticle}}
@@ -100,7 +95,7 @@
 											<div class="card-body">
 												<div class="text-center">
 													<img src="{{asset('img/' ~ article.getImageArticle)}}"
-														class="card-img-top" alt="">
+														class="card-img-top img-fluid" alt="">
 												</div>
 											</div>
 											<ul class="list-group list-group-flush">
@@ -155,9 +150,11 @@
 
 		</div>
 	</div>
-	<!-- FOOTER -->
 
-</div>
+	<a href="{{ path(app.request.get('_route')) }}">Same page</a>
+	
+
+</section>
 <!-- </main> -->
 <!--Carousel Wrapper for Pictures-->
 

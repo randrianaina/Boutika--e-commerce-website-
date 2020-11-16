@@ -4,17 +4,35 @@
 
 {% block body %}
 <p>{{sous_categorie.getLibelleSousCategorie}}</p>
-<div class="row row-cols-1 row-cols-md-3">
+<div class="container mt-5">
+	<div class="row mx-auto my-auto">
 {% for article in articles %}
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{article.getLibelleArticle}}</h5>
-        <p class="card-text">{{article.getPrixTtcArticle}} €</p>
-      </div>
-    </div>
-  </div>
+ <div class="col-md-6 col-lg-4 col-12">
+			<div class="card-deck">
+				<div class="card mb-2 m-3">
+					<h5 class="card-title text-center pt-3">{{article.getLibelleArticle}}</h5>
+					<div class="card-body">
+						<div class="text-center">
+							<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top " alt="">
+						</div>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item text-center text-success">{{article.getPrixTtcArticle}}
+							€</li>
+					</ul>
+					<div class="card-body">
+						{# Bouton clic panier #}
+						<a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
+							class="card-link text-warning mx-3">
+							{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
+							{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
+						</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
 {% endfor %}
+</div>
 </div>
 {% endblock %}

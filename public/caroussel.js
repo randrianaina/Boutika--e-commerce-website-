@@ -18,3 +18,13 @@ $('.multi-item-carousel .item').each(function () {
         $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
     }
 });
+
+
+//Checkbox
+$(".checkbox_custom").on('change', function () {
+    var checked = $(this)[0].checked;
+    if (checked)
+        $('label').addClass("btn-success").removeClass("btn-default");
+    else
+        $('label').addClass("btn-default").removeClass("btn-success");
+});

@@ -10,11 +10,11 @@
 	{{ form_row(shipping_address_Form.nom_contact, {
             label: 'Contact (nom)'
         }) }}
-	{{ form_row(shipping_address_Form.prenom_contact|escape|raw) }}
-	{{ form_row(shipping_address_Form.adresse_contact|escape|raw) }}
-	{{ form_row(shipping_address_Form.cp_contact|escape|raw) }}
-	{{ form_row(shipping_address_Form.ville_contact|escape|raw) }}
-	{{ form_row(shipping_address_Form.id_utilisateur|escape|raw) }}
+	{{ form_row(shipping_address_Form.prenom_contact) }}
+	{{ form_row(shipping_address_Form.adresse_contact) }}
+	{{ form_row(shipping_address_Form.cp_contact) }}
+	{{ form_row(shipping_address_Form.ville_contact) }}
+	{{ form_row(shipping_address_Form.id_utilisateur) }}
 
 
 	<button type="submit" class="btn btn-primary">Update!</button>

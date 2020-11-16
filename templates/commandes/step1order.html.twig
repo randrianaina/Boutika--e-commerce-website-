@@ -4,13 +4,18 @@
 {% endblock %}
 
 {% block body %}
-	{{ form_start(select_adresse_livraison_Form) }}
-	{{ form_row(select_adresse_livraison_Form.adresselivraison) }}
-	{# form_widget (select_adresse_livraison_Form.adresse_livraison, {'attr': {
-						'class': 'custom-control-input'
-					}}) #}
-	<button type="submit" class="btn btn-primary">Suivant</button>
-	{{ form_end(select_adresse_livraison_Form) }}
 
+<div class="container">
+	{{ form_start(select_adresse_livraison_Form) }}
+	<h1 class="h3 mb-3 font-weight-normal">Veuillez sélectioner une adresse de livraison</h1>
+	<div class="row my-5">
+		{{ form_widget(select_adresse_livraison_Form.adresselivraison,
+			{'attr': {'class': 'my-3'}}) }}
+	</div>
+
+	<button type="submit" class="btn btn-primary">Suivant</button>
+
+	{{ form_end(select_adresse_livraison_Form) }}
+</div>
 
 {% endblock %}
