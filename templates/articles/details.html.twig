@@ -7,16 +7,11 @@
 <section class="mb-5">
     <div class="card bg-light">
         <div class="card-body">
-
             <div class="row">
                 <div class="col-md-6 mb-4 mb-md-0">
-
                     <div id="mdb-lightbox-ui"></div>
-
                     <div class="mdb-lightbox">
-
                         <div class="row product-gallery mx-1">
-
                             <div class="col-12 mb-0">
                                 <figure class="view overlay rounded z-depth-1 main-img">
                                     <a href="{{asset('img/' ~ article.getImageArticle)}}" data-size="710x823">
@@ -24,7 +19,6 @@
                                             class="img-fluid z-depth-1">
                                     </a>
                                 </figure>
-
                             </div>
                             <div class="col-12">
                                 <div class="row">
@@ -38,27 +32,19 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-6">
-
                     <h5>{{article.getLibelleArticle}}</h5>
-
-
                     <p><span class="mr-1"><strong>{{article.getPrixTtcArticle}} €</strong></span></p>
                     <p class="pt-1">{{article.getDescriptionArticle}}</p>
-
                     <hr>
-                    <a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
-							class="card-link text-warning mx-3">
-                    <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
-                            class="fas fa-shopping-cart pr-2"></i>Ajouter au panier</button>
-                            </a>
+                    <a href="{{ path ('panier_art_add',{'id': article.getId}) }}" class="card-link text-warning mx-3">
+                        <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
+                                class="fas fa-shopping-cart pr-2"></i>Ajouter au panier</button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
 {% endblock %}

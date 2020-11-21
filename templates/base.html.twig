@@ -17,24 +17,26 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	{% endblock %}
+	{# CSS #}
 	<link rel="stylesheet" href="{{ asset('css/boutika.css')}}" type="text/css">
+
+	{# ICONE #}
+	<link rel="icon" href="{{ asset('icon/favicon.ico')}}" type="image/x-icon" />
+	<link rel="shortcut icon" href="{{ asset('icon/favicon.ico')}}" type="image/x-icon" /> 
 
 </head>
 
 <body>
-
 	<header class="container-fluid">
 		<div class="row">
 			{# NAVBAR #}
 			<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-info ">
-
 				<a class="navbar-brand" href="{{ path('acceuil') }}">BOUTIKA</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
@@ -42,7 +44,6 @@
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Produits
@@ -54,21 +55,9 @@
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{{ path('articles') }}">Tous</a>
 							</div>
-
 						</li>
-
-
-						<li class="nav-item">
-							<a class="nav-link" href="#">A propos de nous</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Contactez-nous</a>
-						</li>
-
 					</ul>
 				</div>
-
-
 				<div class="collapse navbar-collapse " id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto ">
 						{% if (is_granted('ROLE_USER')) and (app.user) %}
@@ -87,9 +76,7 @@
 									livraison</a>
 								<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
 							</div>
-
 						</li>
-
 						{% else %}
 						<li class="nav-item active">
 							<a class="nav-link text-white " href="{{ path('app_login') }}">Connexion
@@ -97,8 +84,6 @@
 							</a>
 						</li>
 						{% endif %}
-
-
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('panier')}}">Panier
 								<i class="fas fa-shopping-cart"></i>
@@ -106,9 +91,9 @@
 							</a>
 						</li>
 					</ul>
-
 				</div>
 			</nav>
+			{# NAVBAR #}
 		</div>
 	</header>
 
@@ -119,11 +104,9 @@
 		<div class="row d-flex flex-row justify-content-around mt-5">
 			<p><a href="#">Revenir au haut</a></p>
 			<p>© 2020 réalisé par <a target="_blank" href="https://www.linkedin.com/in/andrianaina-rabenjamina-4538691b5">Andrianaina Rabenjamina</a></p>
-
 		</div>
 	</footer>
 	<!-- Footer -->
-
 
 	{% block javascripts %}
 	{# FONTAWESOME #}

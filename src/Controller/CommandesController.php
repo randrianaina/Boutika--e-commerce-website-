@@ -10,16 +10,11 @@ use App\Entity\AdresseLivraison;
 use App\Entity\TypesLivraison;
 use App\Entity\LigneCommandes;
 
-
 use App\Form\AddAdresseLivraisonType;
 use App\Form\SelectAdresseLivraisonType;
 use App\Form\SelectTypeLivraisonType;
 
-
 use App\Repository\AdresseLivraisonRepository;
-
-
-
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,32 +28,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-
-
 class CommandesController extends AbstractController
 {
    
-
-    /**
-     * @Route("/commande/all", name="all_commande")
-     * Require ROLE_USER for *every* controller method in this class.
-     * 
-     * @IsGranted("ROLE_USER")
-     */
-    public function list_commande()
-    {
-        // transformation de la date en français
-        
-
-        /* 
-        setlocale(LC_TIME, "fr_FR", "French");
-        dd(strftime("%A %d %B %G", strtotime($date)));
-        dd($date); */
-    }
-
-     /**
-     * @Route("utilisateur/{id}/commande/shipping_adress", name="adresse_livraison")
-     */
+/**
+ * @Route("utilisateur/{id}/commande/shipping_adress", name="adresse_livraison")
+ * Require ROLE_USER for *every* controller method in this class.
+ * 
+ *  @IsGranted("ROLE_USER")
+ */
     public function new_adresse_livraison(Request $request, EntityManagerInterface $em)
     {
         $adresse = new AdresseLivraison();
@@ -66,10 +44,7 @@ class CommandesController extends AbstractController
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /* dd($adresse); */
             $em->persist($adresse);
-
-            
             $em->flush();
 
             $this->addFlash('success', 'Article Updated! Inaccuracies squashed!');
@@ -92,7 +67,7 @@ class CommandesController extends AbstractController
  *
  * @IsGranted("ROLE_USER")
  */
-public function select_adresse_livraison(Request $request, EntityManagerInterface $em)
+public function select_adresse_livraison(Request $request)
 {
     $session = new Session();
 
@@ -101,7 +76,7 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
 
     $id = $this->getUser()->getId();
     
-    $form = $this->createForm(SelectAdresseLivraisonType::class/* , $adresse */);
+    $form = $this->createForm(SelectAdresseLivraisonType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         
@@ -126,7 +101,7 @@ public function select_adresse_livraison(Request $request, EntityManagerInterfac
  *  
  * @IsGranted("ROLE_USER")
  */
-public function select_type_livraison(Request $request, EntityManagerInterface $em)
+public function select_type_livraison(Request $request)
 {
     $session = new Session();
 
@@ -138,9 +113,7 @@ public function select_type_livraison(Request $request, EntityManagerInterface $
         //getData() method store data without a class
         $data= $form->getData();
 
-       
-
-        //store the selected shipping adress
+        //store the selected shipping type adress
         $session->set('type_livraison', $data['type_livraison']);
         
         $this->addFlash('success', 'Adresse sélectionnée !');
@@ -170,15 +143,12 @@ public function see_commande_detail()
             ->getRepository(Articles::class)
             ->findById($id_articles);
     
-    
     //Montant panier
     $montant_panier = $session->get('panier')->getMontantPanier();
    
-
     //Adresse de livraison (tableau)
     $adresse_livraison = $session->get('adresse_livraison');
 
-    
     //type de livraison
     $type_livraison =  $session->get('type_livraison');
 
@@ -187,8 +157,6 @@ public function see_commande_detail()
    
     $session->set('total_commande',$total);
 
-
-     
     return $this->render('commandes/step3order.html.twig', array('lignes_panier'=>$lignes_panier, 
     'montant_panier'=>$montant_panier, 'adresse_livraison'=>$adresse_livraison, 'type_livraison'=>$type_livraison, 'total'=>$total ));
 }
@@ -245,7 +213,7 @@ public function see_commandes()
             ->getRepository(AdresseLivraison::class)
             ->findById($session->get('adresse_livraison')->getId());
 
-        //dd($session->get('type_livraison'));
+        
         $typeLivraison = $this->getDoctrine()
             ->getRepository(TypesLivraison::class)
             ->findById($session->get('type_livraison')->getId());
@@ -266,14 +234,9 @@ public function see_commandes()
         $new_commande->getId();
         $session->clear();
         
-
-        
         return $this->render('commandes/index.html.twig', [
             'id_commande' =>  $new_commande->getId()
         ]);
     }
-
-
-
     
 }

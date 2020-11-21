@@ -21,7 +21,6 @@ class ArticlesController extends AbstractController
     {
         $session = new Session();
 
-
         $depot= $this->getDoctrine()->getRepository(Articles::class);
         $articles= $depot->findAll();
         if (!$articles) {
@@ -38,8 +37,6 @@ class ArticlesController extends AbstractController
         return $this->render('articles/index.html.twig', ['articles'=>$articles,
             'controller_name' => 'ArticlesController',
         ]);
-
-
     }
 
     /**
@@ -77,8 +74,10 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/article/{id}/details", name="article_details")
      */
-    public function Details($id)
+    public function Details($id, Request $request)
     {
+        $session = new Session();
+
         $Article = $this->getDoctrine()
         ->getRepository(Articles::class)
         ->find($id);
@@ -92,8 +91,5 @@ class ArticlesController extends AbstractController
 
         return $this->render('articles/details.html.twig', ['article' =>$Article
         ]);
-    }
-
-
-  
+    }  
 }

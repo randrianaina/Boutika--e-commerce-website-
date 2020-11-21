@@ -47,8 +47,6 @@ class AcceuilController extends AbstractController
             //Stockage en session de la route actuelle
             $session->set('current_uri',$_route);
 
-            
-
         return $this->render('acceuil/index.html.twig', ['articles' => $articles,
             'controller_name' => 'AcceuilController',
         ]);

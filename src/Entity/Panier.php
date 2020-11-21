@@ -58,6 +58,8 @@ class Panier
         if (isset($this->lignes_panier[$id])) {
             //create a new line and add it if empty
             $this->lignes_panier[$id] --;
+
+            //si valeur (ici quantité) de l'article = 0 alors suppression de la ligne de l'article concerné par le programme
             if ($this->lignes_panier[$id] == 0)
         {
             unset($this->lignes_panier[$id]);

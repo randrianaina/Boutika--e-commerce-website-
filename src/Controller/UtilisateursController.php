@@ -33,33 +33,21 @@ class UtilisateursController extends AbstractController
      */
     public function see_details()
     {
-
         $session = new Session();
         $session->set('utilisateur', $this->getUser());
         $session->get('utilisateur');
 
         $id = ($session->get('utilisateur')->getId());
 
-        dump($this->getUser()->getId());
-        dump($id);
-       /*  dump($session->get('utilisateur'));
-        dump($session->get('utilisateur')->getEmailUtilisateur());
- */
         $utilisateur = $this->getDoctrine()
         ->getRepository(Utilisateurs::class)
         ->find($id);
-
-
-
 
         return $this->render('utilisateurs/index.html.twig', [
             'utilisateur' => $utilisateur
         ]);
     }
     
-
-
-
 
     /**
      * @Route("/utilisateur/{id}/edit", name="utilisateur_edit")
@@ -83,9 +71,6 @@ class UtilisateursController extends AbstractController
 
             return $this->redirectToRoute('utilisateur_profil');
         }
-
-
- 
         return $this->render('utilisateurs/edit.html.twig', [
             'userForm' => $form->createView()
         ]);
@@ -105,20 +90,15 @@ class UtilisateursController extends AbstractController
 
         $id = ($session->get('utilisateur')->getId());
 
-        dump($this->getUser()->getId());
-        dump($id);
-
         $adresses_livraison = $this->getDoctrine()
         ->getRepository(AdresseLivraison::class)
         ->findBy(array('id_utilisateur' => $id));
-
-
-
 
         return $this->render('utilisateurs/listshippingaddress.html.twig', [
             'adresses_livraison' => $adresses_livraison
         ]);
     }
-    }
+    
+}
 
 
