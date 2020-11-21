@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!
+{% block title %}Panier
 {% endblock %}
 
 {% block body %}
@@ -19,8 +19,8 @@
 		<tbody>
 			{% for ligne_panier in lignes_paniers %}
 			<tr>
-				<td data-th="Product">
-					<div class="row">
+				<td data-th="Produits">
+					<div class="row mx-auto my-auto d-flex align-items-start flex-column">
 						<div class="col-sm-2 hidden-xs"><img src="{{asset('img/' ~ ligne_panier.getImageArticle)}}"
 								alt="..." class="img-responsive" style="width: 100px; height: 100px" /></div>
 						<div class="col-sm-10">
@@ -29,8 +29,8 @@
 						</div>
 					</div>
 				</td>
-				<td data-th="Price">{{ligne_panier.getPrixTtcArticle}}€</td>
-				<td data-th="Quantity" class="d-flex">
+				<td data-th="Prix">{{ligne_panier.getPrixTtcArticle}}€</td>
+				<td data-th="Quantité" class="d-flex">
 					<button type="button" class="btn btn-outline-success border-0">
 						<a href="{{ path ('panier_art_--', {'id': ligne_panier.getId})}}" class="text-success">
 							<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-dash-circle-fill"

@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandesController!
+{% block title %}Choix type de livraison
 {% endblock %}
 
 {% block body %}
+<div class="container">
 	{{ form_start(select_type_livraison_Form) }}
-	{{ form_row(select_type_livraison_Form.type_livraison) }}
-	{# form_widget (select_adresse_livraison_Form.adresse_livraison, {'attr': {
-									'class': 'custom-control-input'
-								}}) #}
+	<h1 class="h3 mb-3 font-weight-normal">Veuillez sélectioner un type de livraison</h1>
+	<div class="row my-5">
+	{{ form_widget(select_type_livraison_Form.type_livraison,
+			{'attr': {'class': 'my-3'}}) }}
+	
+	</div>
 	<button type="submit" class="btn btn-primary">Suivant</button>
 	{{ form_end(select_type_livraison_Form) }}
+	</div>
 
 
 {% endblock %}

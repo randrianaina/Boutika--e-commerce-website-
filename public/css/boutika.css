@@ -14,14 +14,24 @@ html{
 body {
   margin-top: 68px;
   min-height: 100vh;
-  /* display: flex; */
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  
 }
 
 /*FOOTER*/
 footer {
-  position: static;
-   bottom: 0; 
+  position: absolute;
+  bottom: 0;
   /*  display: flex; */
+  /*Set the fixed height of the footer here*/
+  height: 0px;
+  /* display: flex; */
+   /*Margin bottom by footer height*/
+ 
+   flex-shrink: 0;
  }
 
 /* ACCUEIL */

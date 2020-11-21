@@ -22,7 +22,8 @@
 						<div class="carousel-caption text-left">
 							<h1>SACS</h1>
 							<p>Notre séléction de sacs</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/1" role="button">En savoir plus</a></p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/1" role="button">En savoir plus</a>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -33,7 +34,8 @@
 						<div class="carousel-caption">
 							<h1>DECO</h1>
 							<p>Notre sélection DECO</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/2" role="button">En savoir plus</a></p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/2" role="button">En savoir plus</a>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -44,7 +46,8 @@
 						<div class="carousel-caption text-right">
 							<h1>MODE</h1>
 							<p>Notre sélection MODE</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/3" role="button">En savoir plus</a></p>
+							<p><a class="btn btn-lg btn-primary" href="/categories/3" role="button">En savoir plus</a>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -108,9 +111,12 @@
 												<a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
 													class="card-link text-warning mx-3">
 													{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
-													{# Chaque BTN va representer l'ID d'article #}<i
-														class="fas fa-cart-arrow-down fa-2x"> </i>
+													{# Chaque BTN va representer l'ID d'article #}<button type="button"
+														class="btn btn-light btn-md mr-1 mb-2"><i
+															class="fas fa-shopping-cart pr-2"></i>Ajouter au
+														panier</button>
 												</a>
+
 
 											</div>
 										</a>
@@ -118,7 +124,7 @@
 								</div>
 							</div>
 
-							{% if x == 4 %}
+							{% if x == 3 %}
 						</div>
 					</div>
 					{% set x = 0 %}
@@ -151,8 +157,8 @@
 		</div>
 	</div>
 
-	<a href="{{ path(app.request.get('_route')) }}">Same page</a>
-	
+
+
 
 </section>
 <!-- </main> -->

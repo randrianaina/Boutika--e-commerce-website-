@@ -138,6 +138,8 @@ public function select_type_livraison(Request $request, EntityManagerInterface $
         //getData() method store data without a class
         $data= $form->getData();
 
+       
+
         //store the selected shipping adress
         $session->set('type_livraison', $data['type_livraison']);
         
@@ -171,7 +173,7 @@ public function see_commande_detail()
     
     //Montant panier
     $montant_panier = $session->get('panier')->getMontantPanier();
-    dump($montant_panier);
+   
 
     //Adresse de livraison (tableau)
     $adresse_livraison = $session->get('adresse_livraison');
@@ -180,16 +182,15 @@ public function see_commande_detail()
     //type de livraison
     $type_livraison =  $session->get('type_livraison');
 
-    //frais de livraison
-    $frais_livraison = $session->get('frais_type_livraison');
-
     //Total montant commande
-    $total = $montant_panier+$frais_livraison;
+    $total = $montant_panier+$type_livraison->getFraisLivraison();
    
     $session->set('total_commande',$total);
+
+
      
     return $this->render('commandes/step3order.html.twig', array('lignes_panier'=>$lignes_panier, 
-    'montant_panier'=>$montant_panier, 'adresse_livraison'=>$adresse_livraison, 'type_livraison'=>$type_livraison,'frais_de_livraison'=>$frais_livraison, 'total'=>$total ));
+    'montant_panier'=>$montant_panier, 'adresse_livraison'=>$adresse_livraison, 'type_livraison'=>$type_livraison, 'total'=>$total ));
 }
 
 /**
@@ -262,9 +263,13 @@ public function see_commandes()
         $em = $this->getDoctrine()->getManager();
         $em->persist($new_commande);
         $em->flush(); 
+        $new_commande->getId();
+        $session->clear();
+        
+
         
         return $this->render('commandes/index.html.twig', [
-            'controller_name' => 'CommandesController',
+            'id_commande' =>  $new_commande->getId()
         ]);
     }
 

@@ -95,33 +95,24 @@ class PanierController extends AbstractController
     {
         $session = new Session();
 
+        //Le programme récupère les données stockées le tableau panier dans la session
         $panier = $session->get('panier');
 
-        //si aucun panier existe, créé un nouveau panier
+        //si aucunes données existent, le programme créé un nouveau panier vide
         if (!$session->get('panier')) {
             $session->set('panier', new Panier());
         }
 
+        //Le programme récupère les données stockées le tableau panier dans la session vers un variable
         $panier = $session->get('panier');
-        // On recupere $panier dans la SESSION
-        // ^^ Valeur par default
+        
+        //rajoute les données relatives à un article par son id dans la variable
         $panier->add_ligne($id);
 
+        //enregistre les modifications dans le tableau panier de la session
         $session->set('panier', $panier);
-        // Pour garder dans la SESSION l'etat actuel du $panier
-
-        //dd($_route);
-
-        $path = $request->getUri();
-
-        /* dd($path); */
-
-        //dd($session->get('current_uri'));
-
-        /* $path = $request->getUri();
-
-        $session->set('current_uri',$path); */
-
+        
+        //Redirection vers la dernière route sauvegardée en session pour une meilleure UX, ici accueil ou articles ou article_details 
         return $this->redirectToRoute($session->get('current_uri'));
 
     }
@@ -169,11 +160,6 @@ class PanierController extends AbstractController
     {
         $session = new Session();
         $panier = $session->get('panier');
-         //si aucun panier existe, créé un nouveau panier
-      /*    if (!$session->get('panier')) {
-            $session->set('panier', new Panier());
-        } */
-       /*  $panier = $session->get('panier'); */
         $panier->del_ligne($id);
         $session->set('panier',$panier);
         return $this->redirectToRoute('panier');

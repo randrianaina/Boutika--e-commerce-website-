@@ -16,7 +16,7 @@ class AcceuilController extends AbstractController
     /**
      * @Route("/", name="acceuil")
      */
-    public function Acceuil(Request $request, $_route)
+    public function Acceuil(Request $request)
     {
         $session = new Session();
 
@@ -40,17 +40,14 @@ class AcceuilController extends AbstractController
                 throw $this->createNotFoundException('Pas de catégories trouvés ...!');
             }
 
-            dump($session->getName());
-            dump($session->get('panier'));
-            dump($session->get('user'));
-            dump($session->get('Utilisateurs'));
-            //dd($this->getUser());
-            //dd($_route);
-            /* $path = $request->getUri(); */
+            //obtention du nom de la route avec l'objet Request
+                // voir https://symfony.com/doc/current/routing.html#getting-the-route-name-and-parameters
+            $_route = $request->get('_route');
 
+            //Stockage en session de la route actuelle
             $session->set('current_uri',$_route);
 
-            //dd($session->get('current_uri'));
+            
 
         return $this->render('acceuil/index.html.twig', ['articles' => $articles,
             'controller_name' => 'AcceuilController',

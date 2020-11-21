@@ -1,55 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandesController!
+{% block title %}Récapitulatif de votre commande
 {% endblock %}
 
 {% block body %}
-<h1>Ma commande</h1>
-{% for ad_livraison in adresse_livraison %}
-	<h3>Livré à :
-		{{ ad_livraison.getNomContact }}
-		{{ ad_livraison.getPrenomContact }}
-	</h3>
-	<h2>
-		{{ad_livraison.getAdresseContact}}</h2>
-	<h2>
-		{{ad_livraison.getCpContact}}
-		{{ad_livraison.getVilleContact}}
-	</h2>
-{% endfor %}
-<h3>Type de livraison :
-	{{ type_livraison.getLibelleLivraison}}
-</h3>
 {% if lignes_panier | length > 0 %}
-	<table
-		class="table table-hover">
-		{# En-tête tableau #}
-		<thead class="thead-light">
-			<tr>
-				<th colspan="2" class="text-center">Article Designation</th>
-				<th class="text-center">Prix unitaire TTC</th>
-				<th class="text-center">Quantity</th>
-				<th class="text-center">Prix TTC</th>
-				<th class="text-center">Action</th>
+<div class="container-fluid">
+	<h2 class="text-center">Récapitulatif</h2>
+	<table id="cart" class="table table-hover table-condensed">
+		<thead>
+			{# En-tête tableau #}
+			<tr style="width:100%">
+				<th>Produits</th>
+				<th>Prix</th>
+				<th>Quantité</th>
+				<th class="text-center">Sous-total</th>
+				<th style="width:10%"></th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for ligne_panier in lignes_panier %}
-				<tr>
-					<td class="text-success text-center">{{ligne_panier.getLibelleArticle}}</td>
-					{# Prix Unitaire #}
-					<td class="text-success text-center">{{ligne_panier.getPrixTtcArticle}}€</td>
-					<td></td>
-					<td>
-						{{ app.session.get('panier').getLignesPanier[ligne_panier.getId] }}</td>
-				</tr>
-			</td>
-			<td>
-				{{ (ligne_panier.getPrixTtcArticle * app.session.get('panier').getLignesPanier[ligne_panier.getId]) }}
-				€
-			</td>
-			<td></td>
-			{# Articles Image + nom #}
+			<tr>
+				<td data-th="Produits">
+					<div class="row mx-auto my-auto d-flex align-items-start flex-column">
+						<div class="col-sm-2 hidden-xs"><img src="{{asset('img/' ~ ligne_panier.getImageArticle)}}"
+								alt="..." class="" style="width: 100px; height: 100px" /></div>
+						<div class="col-sm-10">
+							<h4 class="nomargin">{{ligne_panier.getLibelleArticle}}</h4>
+							<p>{{ligne_panier.getDescriptionArticle}}.</p>
+						</div>
+					</div>
+				</td>
+				<td data-th="Prix">{{ligne_panier.getPrixTtcArticle}}€</td>
+				<td data-th="Quantité">
+
+					{{ app.session.get('panier').getLignesPanier[ligne_panier.getId] }}
+
+				</td>
+				<td data-th="Sous-total" class="text-center">
+					{{ (ligne_panier.getPrixTtcArticle * app.session.get('panier').getLignesPanier[ligne_panier.getId]) }}
+					€</td>
+
+			</tr>
+			{% endfor %}
 		</tbody>
-	</tr>
-</td>{% endfor %}{# Quantité #}</tbody></table>{% endif %}<h2>Sous-total :{{ montant_panier }}€</h2><h2>Frais de livraison :{{ frais_de_livraison }}€</h2><h1>Total :{{ total }} </h1>{% endblock %}
+		<tfoot>
+			<tr class="visible-xs">
+				<td class=""><strong>Livré à : {{ adresse_livraison.getNomContact }}
+						{{ adresse_livraison.getPrenomContact }}
+						<br>{{adresse_livraison.getAdresseContact}} {{adresse_livraison.getCpContact}}
+						{{adresse_livraison.getVilleContact}}</strong></td>
+				<td class=""><strong>Type de livraison : {{ type_livraison.getLibelleLivraison}}</strong>
+				</td>
+				<td class=""><strong>Frais de livraison : {{ type_livraison.getFraisLivraison}} €</strong>
+				</td>
+				<td class=""><strong>Délais de livraison : {{ type_livraison.getDelaiLivraison}}
+						jours</strong>
+				</td>
+			</tr>
+
+			<tr>
+				<td><a href="{{ path('articles')}}" class=" btn btn-warning"><i class="fa fa-angle-left"></i>Retourner à
+						mon panier</a></td>
+				<td colspan="2" class="hidden-xs"></td>
+				<td class="hidden-xs text-center"><strong>Total : {{total}} €</strong></td>
+				<td><a href="{{ path('new_commande')}}" class="btn btn-success btn-block">Valider ma commande<i
+							class="fa fa-angle-right"></i></a></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	{% else %}
+	<div class="panier mx-auto py-5 w-75 border border-light rounded text-center">
+		<h5 class="mb-5">Votre panier est vide</h5>
+		<a href="{{ path('articles')}}" class=" btn btn-warning"><i class="fa fa-angle-left"></i>Continuer
+			mes achats</a>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

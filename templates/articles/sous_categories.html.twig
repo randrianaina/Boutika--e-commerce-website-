@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticlesController!{% endblock %}
+{% block title %}{{sous_categorie.getLibelleSousCategorie}}{% endblock %}
 
 {% block body %}
-<p>{{sous_categorie.getLibelleSousCategorie}}</p>
+<section class="jumbotron text-center">
+	<div class="container">
+		<h1 class="jumbotron-heading">{{sous_categorie.getLibelleSousCategorie}}</h1>
+		<p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
+			mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années
+			1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de
+			polices de texte...</p>
+	</div>
+</section>
+
 <div class="container mt-5">
 	<div class="row mx-auto my-auto">
 {% for article in articles %}
  <div class="col-md-6 col-lg-4 col-12">
 			<div class="card-deck">
 				<div class="card mb-2 m-3">
+				<a href="/article/{{article.getId}}/details">
 					<h5 class="card-title text-center pt-3">{{article.getLibelleArticle}}</h5>
 					<div class="card-body">
 						<div class="text-center">
@@ -20,15 +30,18 @@
 						<li class="list-group-item text-center text-success">{{article.getPrixTtcArticle}}
 							€</li>
 					</ul>
+					</a>
 					<div class="card-body">
 						{# Bouton clic panier #}
 						<a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
 							class="card-link text-warning mx-3">
 							{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
-							{# Chaque BTN va representer l'ID d'article #}<i class="fas fa-cart-arrow-down fa-2x"> </i>
+							{# Chaque BTN va representer l'ID d'article #} <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
+                            class="fas fa-shopping-cart pr-2"></i>Ajouter au panier</button>
 						</a>
 
 					</div>
+					
 				</div>
 			</div>
 		</div>

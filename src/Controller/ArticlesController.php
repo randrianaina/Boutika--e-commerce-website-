@@ -17,7 +17,7 @@ class ArticlesController extends AbstractController
     /**
      * @Route("/articles", name="articles")
      */
-    public function All(Request $request, $_route)
+    public function All(Request $request)
     {
         $session = new Session();
 
@@ -28,10 +28,12 @@ class ArticlesController extends AbstractController
             throw $this->createNotFoundException('Pas d\'articles trouvés ...!');
         }
 
-        /* $path = $request->getUri(); */
+        //obtention du nom de la route avec l'objet Request
+                // voir https://symfony.com/doc/current/routing.html#getting-the-route-name-and-parameters
+                $_route = $request->get('_route');
 
-        $session->set('current_uri',$_route);
-        //dump($session->get('panier'));
+                //Stockage en session de la route actuelle
+                $session->set('current_uri',$_route);
 
         return $this->render('articles/index.html.twig', ['articles'=>$articles,
             'controller_name' => 'ArticlesController',
@@ -73,19 +75,6 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/categories", name="categories")
-     */
-    public function AllCategories()
-    {   
-        $depot= $this->getDoctrine()->getRepository(Categories::class);
-        $categories = $depot->findAll();
-
-        return $this->render('articles/categories/index.html.twig', ['categories' =>$categories
-        ]);
-    }
-
-
-    /**
      * @Route("/article/{id}/details", name="article_details")
      */
     public function Details($id)
@@ -94,7 +83,12 @@ class ArticlesController extends AbstractController
         ->getRepository(Articles::class)
         ->find($id);
 
+        //obtention du nom de la route avec l'objet Request
+                // voir https://symfony.com/doc/current/routing.html#getting-the-route-name-and-parameters
+                $_route = $request->get('_route');
 
+                //Stockage en session de la route actuelle
+                $session->set('current_uri',$_route);
 
         return $this->render('articles/details.html.twig', ['article' =>$Article
         ]);
