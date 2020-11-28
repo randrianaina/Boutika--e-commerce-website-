@@ -4,20 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Ajouter des informations</h1>
+	<div class="container-fluid">
+		<h1>Ajouter une adresse de livraison</h1>
 
-	{{ form_start(shipping_address_Form) }}
-	{{ form_row(shipping_address_Form.nom_contact, {
-            label: 'Contact (nom)'
+		{{ form_start(shipping_address_Form) }}
+		{{ form_row(shipping_address_Form.nom_contact, {
+            label: 'Nom du contact'
         }) }}
-	{{ form_row(shipping_address_Form.prenom_contact) }}
-	{{ form_row(shipping_address_Form.adresse_contact) }}
-	{{ form_row(shipping_address_Form.cp_contact) }}
-	{{ form_row(shipping_address_Form.ville_contact) }}
-	{{ form_row(shipping_address_Form.id_utilisateur) }}
+		{{ form_row(shipping_address_Form.prenom_contact, {
+            label: 'Prénom du contact'
+        }) }}
+		{{ form_row(shipping_address_Form.adresse_contact, {
+            label: 'Adresse du contact'
+        }) }}
+		{{ form_row(shipping_address_Form.cp_contact, {
+            label: 'Code postal contact'
+        }) }}
+		{{ form_row(shipping_address_Form.ville_contact) }}
+		{{ form_row(shipping_address_Form.id_utilisateur) }}
 
 
-	<button type="submit" class="btn btn-primary">Update!</button>
-	{{ form_end(shipping_address_Form) }}
-
+		<button type="submit" class="btn btn-primary">Enregister</button>
+		{{ form_end(shipping_address_Form) }}
+	</div>
 {% endblock %}

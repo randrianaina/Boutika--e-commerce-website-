@@ -25,7 +25,7 @@ class AddAdresseLivraisonType extends AbstractType
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //dd($this->security->getUser()->getId());
+        
         $builder
            
             ->add('nom_contact', TextType::class)
@@ -33,7 +33,7 @@ class AddAdresseLivraisonType extends AbstractType
             ->add('adresse_contact', TextType::class)
             ->add('cp_contact', TextType::class)
             ->add('ville_contact', TextType::class)
-            ->add('id_utilisateur', HiddenType::class,['empty_data' => $this->security->getUser()/* ->getId() */,])
+            ->add('id_utilisateur', HiddenType::class,['empty_data' => $this->security->getUser(),])
             
         ;
     }
