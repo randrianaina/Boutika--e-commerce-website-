@@ -80,7 +80,10 @@ class PanierController extends AbstractController
            $totalitem = $item['article']->getPrixTtcArticle() * $item['quantite'];
            $total += $totalitem;
        }
-
+       
+       if (empty($total)){
+        $panier->setMontantPanier(0);
+       }
        $panier->setMontantPanier($total);
 
        $session->set('panier', $panier);
