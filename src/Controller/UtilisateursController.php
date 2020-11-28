@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-//utilisation de SensioFrameworkExtraBundle pour l'utilisation d'annotations pour limiter l'accès à certains contrôlleurs
+//utilisation de SensioFrameworkExtraBundle pour l'utilisation d'annotations pour limiter l'accès à des méthodes
     //voir https://symfony.com/doc/current/security.html#security-securing-controller
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
