@@ -5,152 +5,152 @@
 
 {% block body %}
 
-<section class="container-fluid">
-	{# PREMIER CAROUSEL #}
-	<div class="row mx-auto my-auto">
-		<div id="myCarousel" class="carousel slide mx-auto w-100 " data-ride=" carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target=" #myCarousel" data-slide-to="1" class=""></li>
-				<li data-target=" #myCarousel" data-slide-to="2" class=""></li>
-			</ol>
-			<div id="accueil_carousel" class="carousel-inner">
-				<div class="carousel-item active mx-auto text-center">
-					<img class="first-slide center-block" src="{{ asset('img/acceuil/1756233025_30aa823357_h.jpg') }}"
-						alt="First slide">
-					<div class="">
-						<div class="carousel-caption text-left">
-							<h1>SACS</h1>
-							<p>Notre séléction de sacs</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/1" role="button">En savoir plus</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item text-center">
-					<img class="second-slide center-block" src="{{ asset('img/acceuil/1756458801_5553c78f8a_h.jpg') }}"
-						alt="Second slide">
-					<div class="container-fluid">
-						<div class="carousel-caption">
-							<h1>DECO</h1>
-							<p>Notre sélection DECO</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/2" role="button">En savoir plus</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item text-center">
-					<img class="third-slide center-block" src="{{ asset('img/acceuil/1756252495_a912b611fa_h.jpg') }}"
-						alt="Third slide">
-					<div class="container-fluid">
-						<div class="carousel-caption text-right">
-							<h1>MODE</h1>
-							<p>Notre sélection MODE</p>
-							<p><a class="btn btn-lg btn-primary" href="/categories/3" role="button">En savoir plus</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-	</div>
-	{# PREMIER CAROUSEL #}
-
-	{# CAROUSEL ARTICLES #}
-	<div class="row mx-auto my-auto">
-		<!--Carousel Wrapper for Articles-->
-		<div class="d-flex flex-row mt-5 mx-auto">
-			<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-				<!--Indicators-->
-				<ol class="carousel-indicators ">
-					<li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-					<li data-target="#multi-item-example" data-slide-to="1"></li>
-					<li data-target="#multi-item-example" data-slide-to="2"></li>
+	<section
+		class="container-fluid">
+		{# PREMIER CAROUSEL #}
+		<div class="row mx-auto my-auto">
+			<div id="myCarousel" class="carousel slide mx-auto w-100 " data-ride=" carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target=" #myCarousel" data-slide-to="1" class=""></li>
+					<li data-target=" #myCarousel" data-slide-to="2" class=""></li>
 				</ol>
-				<!--/.Indicators-->
-
-				<!--Slides-->
-				<div class="carousel-inner " role="listbox">
-					{% set x = 0 %}
-					{% for article in articles %}
-
-					{% set x = x + 1 %}
-					{% if x == 1 %}
-					<!--First slide-->
-
-					<div class="carousel-item {{ loop.first ? 'active' : ''}} ">
-						<div class="card-deck">
-							{% endif %}
-							<div
-								class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mx-auto my-auto">
-								<div class="col mb-4">
-									<div class="card m-3" style="width: 18rem">
-										<a href="/article/{{article.getId}}/details">
-											<h5 class="card-title text-center mt-3">{{article.getLibelleArticle}}
-											</h5>
-											<div class="card-body">
-												<div class="text-center">
-													<img src="{{asset('img/' ~ article.getImageArticle)}}"
-														class="card-img-top img-fluid" alt="">
-												</div>
-											</div>
-											<ul class="list-group list-group-flush">
-												<li class="list-group-item text-center text-success">
-													{{article.getPrixTtcArticle}}
-													€</li>
-											</ul>
-											<div class="card-body">
-												{# Bouton clic panier #}
-												<a href="{{ path ('panier_art_add',{'id': article.getId}) }}"
-													class="card-link text-warning mx-3">
-													{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
-													{# Chaque BTN va representer l'ID d'article #}<button type="button"
-														class="btn btn-light btn-md mr-1 mb-2"><i
-															class="fas fa-shopping-cart pr-2"></i>Ajouter au
-														panier</button>
-												</a>
-											</div>
-										</a>
-									</div>
-								</div>
+				<div id="accueil_carousel" class="carousel-inner">
+					<div class="carousel-item active mx-auto text-center">
+						<img class="first-slide center-block" src="{{ asset('img/acceuil/1756233025_30aa823357_h.jpg') }}" alt="First slide">
+						<div class="">
+							<div class="carousel-caption text-left">
+								<h1>SACS</h1>
+								<p>Notre séléction de sacs</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="/categories/1" role="button">En savoir plus</a>
+								</p>
 							</div>
-							<!--/.First slide-->
-							{% if x == 3 %}
 						</div>
 					</div>
-					{% set x = 0 %}
-					{% endif %}
-					{% endfor %}
+					<div class="carousel-item text-center">
+						<img class="second-slide center-block" src="{{ asset('img/acceuil/1756458801_5553c78f8a_h.jpg') }}" alt="Second slide">
+						<div class="container-fluid">
+							<div class="carousel-caption">
+								<h1>DECO</h1>
+								<p>Notre sélection DECO</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="/categories/2" role="button">En savoir plus</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="carousel-item text-center">
+						<img class="third-slide center-block" src="{{ asset('img/acceuil/1756252495_a912b611fa_h.jpg') }}" alt="Third slide">
+						<div class="container-fluid">
+							<div class="carousel-caption text-right">
+								<h1>MODE</h1>
+								<p>Notre sélection MODE</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="/categories/3" role="button">En savoir plus</a>
+								</p>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-			<!--/.Slides-->
-
-			<!--Controls-->
-			<div>
-				<a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
-					<i class="fas fa-chevron-left fa-5x" style="color: grey"></i>
+				<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
 				</a>
-			</div>
-			<div>
-				<a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
-					<i class="fas fa-chevron-right fa-5x" style="color: grey"></i>
+				<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
-			<!--/.Controls-->
-
 		</div>
-	</div>
-	{# CAROUSEL ARTICLES #}
-</section>
+		{# PREMIER CAROUSEL #}
+
+		{# CAROUSEL ARTICLES #}
+		<div
+			class="row mx-auto my-auto">
+			<!--Carousel Wrapper for Articles-->
+			<div class="d-flex flex-row mt-5 mx-auto">
+				<div
+					id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+					<!--Indicators-->
+					<ol class="carousel-indicators ">
+						<li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+						<li data-target="#multi-item-example" data-slide-to="1"></li>
+						<li data-target="#multi-item-example" data-slide-to="2"></li>
+					</ol>
+					<!--/.Indicators-->
+
+					<!--Slides-->
+					<div class="carousel-inner " role="listbox">
+						{% set x = 0 %}
+						{% for article in articles %}
+
+							{% set x = x + 1 %}
+							{% if x == 1 %}
+								<!--First slide-->
+
+								<div class="carousel-item {{ loop.first ? 'active' : ''}} ">
+									<div class="card-deck">
+									{% endif %}
+									<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mx-auto my-auto">
+										<div class="col mb-4">
+											<div class="card m-3" style="width: 18rem">
+												<a href="/article/{{article.getId}}/details">
+													<h5 class="card-title text-center mt-3">{{article.getLibelleArticle}}
+													</h5>
+													<div class="card-body">
+														<div class="text-center">
+															<img src="{{asset('img/' ~ article.getImageArticle)}}" class="card-img-top img-fluid" alt="">
+														</div>
+													</div>
+													<ul class="list-group list-group-flush">
+														<li class="list-group-item text-center text-success">
+															{{article.getPrixTtcArticle}}
+															€</li>
+													</ul>
+													<div
+														class="card-body">
+														{# Bouton clic panier #}
+														<a href="{{ path ('panier_art_add',{'id': article.getId}) }}" class="card-link text-warning mx-3">
+															{# path - NAME @Route; on ajoute le paramètre demandé par la methode 'add'#}
+															{# Chaque BTN va representer l'ID d'article #}
+																<button type="button" class="btn btn-light btn-md mr-1 mb-2"> <i class="fas fa-shopping-cart pr-2"></i>Ajouter au
+																																																panier</button>
+														</a>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<!--/.First slide-->
+									{% if x == 3 %}
+									</div>
+								</div>
+								{% set x = 0 %}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+				<!--/.Slides-->
+
+				<!--Controls-->
+				<div>
+					<a class="carousel-control-prev" href="#multi-item-example" role="button" data-slide="prev">
+						<i class="fas fa-chevron-left fa-5x" style="color: grey"></i>
+						<span class="sr-only">Previous</span>
+					</a>
+				</div>
+				<div>
+					<a class="carousel-control-next" href="#multi-item-example" role="button" data-slide="next">
+						<i class="fas fa-chevron-right fa-5x" style="color: grey"></i>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+				<!--/.Controls-->
+
+			</div>
+		</div>
+		{# CAROUSEL ARTICLES #}
+	</section>
 {% endblock %}

@@ -29,12 +29,11 @@ class PanierController extends AbstractController
          //le programme récupère de nouveau des données dans la session
          $panier=($session->get('panier'));
 
-         //déclaration d'une variable piour une utilisation utlérieure
+         //déclaration d'une variable pour une utilisation ultérieure
          $total_quantite=0;
         
         //s'il y a des données après avoir fait appel à l'attribut panier dans la session
         if($panier){
-            
             //On fait appel à la méthode getLignesPanier() de class Panier pour résortir les informations stockés sous forme de tableau 
                 // et on retourne dans la variable $id_articles toutes les clés du tableau panier dans la session la fonction PHP array_keys 
             $id_articles = array_keys($session->get('panier')->getLignesPanier());
@@ -80,11 +79,8 @@ class PanierController extends AbstractController
            $totalitem = $item['article']->getPrixTtcArticle() * $item['quantite'];
            $total += $totalitem;
        }
-
        $panier->setMontantPanier($total);
-
        $session->set('panier', $panier);
-
         return $this->render('panier/index.html.twig', array('lignes_paniers'=> $lignes_panier, 'total_quantite'=>$total_quantite , 'Montant_total' =>$total));
     }
 
@@ -106,7 +102,7 @@ class PanierController extends AbstractController
         //Le programme récupère les données stockées le tableau panier dans la session vers un variable
         $panier = $session->get('panier');
         
-        //rajoute les données relatives à un article par son id dans la variable
+        //rajoute les données relatives à un article par son id dans la variable par la méthode add_ligne($id) de l'entité Panier
         $panier->add_ligne($id);
 
         //enregistre les modifications dans le tableau panier de la session
@@ -120,10 +116,17 @@ class PanierController extends AbstractController
      * @Route("/panier/{id}/remove" , name="panier_art_remove")           
      */
     public function remove($id, SessionInterface $session)
-    {
+    {   
+        //déclaration de la variable $session par l'appel de l'objet Session 
         $session = new Session();
+
+        //le programme récupère de nouveau des données dans la session 
         $panier = $session->get('panier');
+
+        //suppression de la ligne de produits concernés par la méthode del_all_ligne($id) de l'entité Panier
         $panier->del_all_ligne($id);
+
+        //sauvegarde des données en session
         $session->set('panier', $panier);
         return $this->redirectToRoute('panier');
     }
@@ -133,19 +136,24 @@ class PanierController extends AbstractController
      */
     public function quantityadd($id, SessionInterface $session)
     {
+        //déclaration de la variable $session par l'appel de l'objet Session 
         $session = new Session();
 
+         //le programme récupère de nouveau des données dans la session 
         $panier = $session->get('panier');
 
-         //si aucun panier existe, créé un nouveau panier
+         //si aucunes données n'est récupéré, créé un nouveau panier
          if (!$session->get('panier')) {
             $session->set('panier', new Panier());
         }
 
+        //le programme récupère de nouveau des données dans la session 
         $panier = $session->get('panier');
 
+        //rajoute en valeur (en quantité) le produit séléctionné dans le panier
         $panier->add_ligne($id);
 
+        //sauvegarde du panier
         $panier = $session->set('panier',$panier);
 
         return $this->redirectToRoute('panier');
@@ -157,9 +165,16 @@ class PanierController extends AbstractController
      */
     public function quantityremove($id, SessionInterface $session)
     {
+        //déclaration de la variable $session par l'appel de l'objet Session 
         $session = new Session();
+
+         //le programme récupère de nouveau des données dans la session 
         $panier = $session->get('panier');
+
+        //décrémente en valeur (en quantité) le produit séléctionné dans le panier
         $panier->del_ligne($id);
+
+         //sauvegarde du panier
         $session->set('panier',$panier);
         return $this->redirectToRoute('panier');
     }
