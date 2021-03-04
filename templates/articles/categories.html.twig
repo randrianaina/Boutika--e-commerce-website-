@@ -1,32 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{categorie.getLibelleCategorie}}
+{% block title %}
+	{{categorie.getLibelleCategorie}}
 {% endblock %}
 
 {% block body %}
-<section class="jumbotron text-center">
-	<div class="container">
-		<h1 class="jumbotron-heading">{{categorie.getLibelleCategorie}}</h1>
-		<p class="lead text-muted mb-0">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
-			mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années
-			1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de
-			polices de texte...</p>
-	</div>
-</section>
-<div class="container-fluid">
-<div class="row row-cols-1 row-cols-md-3">
-	{% for sous_categorie in sous_categories %}
-	<div class="col mb-4">
-		<div class="card h-100">
+	<section class="jumbotron text-center">
+		<div class="container">
+			<h1 class="jumbotron-heading">{{categorie.getLibelleCategorie}}</h1>
+			<p class="lead text-muted mb-0">Parcourez les catégories</p>
+		</div>
+	</section>
+	<div class="container-fluid">
+		<div class="row row-cols-1 row-cols-md-3">
+			{% for sous_categorie in sous_categories %}
+				<div class="col mb-4">
+					<div class="card h-100">
 
-			<div class="card-body">
-				<h5 class="card-title text-center">
-					<a href="/souscategories/{{sous_categorie.getId}}">{{sous_categorie.getLibelleSousCategorie}}</a>
-				</h5>
-			</div>
+						<div class="card-body">
+							<h5 class="card-title text-center">
+								<a href="/souscategories/{{sous_categorie.getId}}">{{sous_categorie.getLibelleSousCategorie}}</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
-	{% endfor %}
-</div>
-</div>
 {% endblock %}

@@ -37,6 +37,7 @@ class Panier
         return $this;
     }
 
+    //méthode pour l'ajout d'une ligne d'article
     public function add_ligne($id)
     {
         if (isset($this->lignes_panier[$id])) {

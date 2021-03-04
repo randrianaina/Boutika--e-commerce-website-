@@ -71,14 +71,18 @@ class PanierController extends AbstractController
                 'quantite' => $quantite
             ];
        }
-
        //calcul du prix total du panier
        $total = 0 ;
        foreach ($tableau2 as $item)
        {
            $totalitem = $item['article']->getPrixTtcArticle() * $item['quantite'];
            $total += $totalitem;
+           
        }
+       /* dd($total); */
+      /*  if(empty($total)){
+        $panier->setMontantPanier(0);
+       } */
        $panier->setMontantPanier($total);
        $session->set('panier', $panier);
         return $this->render('panier/index.html.twig', array('lignes_paniers'=> $lignes_panier, 'total_quantite'=>$total_quantite , 'Montant_total' =>$total));
